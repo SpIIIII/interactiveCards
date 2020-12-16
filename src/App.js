@@ -1,13 +1,13 @@
 import React from "react";
 import "./styles.css";
 import SideBar from "./pages/sideBar";
+import MainCard from "./pages/mainCard";
 
 export default function App() {
   return (
     <div className="App row">
-      {/* <div clssName="header"></div> */}
-      <div className="mainCard col"></div>
       <SideBar />
+      <MainCard />
     </div>
   );
 }

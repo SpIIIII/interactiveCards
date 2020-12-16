@@ -14,13 +14,28 @@
 
 .mainCard {
   height: 100%;
-  position: absolute;
+  /* position: absolute; */
   background-color: #fafbfe;
 }
 
 .sideBar {
   height: 100%;
-  /* width: 20vw; */
-  position: absolute;
+  padding-top: 10vh;
+  /* position: absolute; */
   background-color: #313a46;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+li {
+  margin: 12px 0;
+}
+
+.barText {
+  color: #8391a2;
+}
+.barTextAct {
+  color: #fbfbfb;
 }
