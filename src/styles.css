@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightcyan;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.mainCard {
+  height: 100%;
+  position: absolute;
+  background-color: #fafbfe;
+}
+
+.sideBar {
+  height: 100%;
+  /* width: 20vw; */
+  position: absolute;
+  background-color: #313a46;
+}
