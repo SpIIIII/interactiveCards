@@ -33,7 +33,7 @@ function SideBarPunct() {
 function SideBar() {
   return (
     <div className="sideBar col-sm-2">
-      <ul className="barText">
+      <ul className="barText header_style">
         <li>
           <SideBarPunct />
         </li>

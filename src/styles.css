@@ -1,4 +1,7 @@
-@import common;
+@import "styles/common.css";
+@import "styles/node.css";
+@import "styles/mainCard.css"
+
 * {
   margin: 0;
   padding: 0;
@@ -14,11 +17,7 @@
   text-align: center;
 }
 
-.mainCard {
-  height: 100vh;
-  /* position: absolute; */
-  background-color: #fafbfe;
-}
+
 
 .sideBar {
   height: 100vh;
@@ -57,19 +56,4 @@ li {
   width: 100%;
 }
 
-.nodeResponse {
-  height: 150px;
-  width: 210px;
-  margin: 10px;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-}
-.nodeRequest {
-  height: 75px;
-  width: 210px;
-  margin: 10px;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-}
+

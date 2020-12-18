@@ -1,0 +1,29 @@
+.nodeResponse {
+    /* height: 150px; */
+    width: 310px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  .nodeRequest {
+    height: 75px;
+    width: 210px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+.node{
+    padding: 15px 0;
+}
+
+.node_header_color{
+    color: #6C757D;
+    font-size: 1.1rem;
+}
+.node_text_color{
+    color: #6c757d;
+    font-size:0.9rem;
+}
