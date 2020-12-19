@@ -1,12 +1,21 @@
-import { convertCompilerOptionsFromJson } from "typescript"
-import allNodes from "./nodes"
+import { useState } from "react";
+import allNodes from "./nodes";
 
+const copyNodes = { ...allNodes };
 
-// const graphNode = 
-// function getChild (node){
-//     let childs = [];
-//     for (n of allNodes){
-//         if (node.child == )
-//     } 
-// }
-export default allNodes
+function makeGraph(allNodes, nodes, tree) {
+  const chNodes = [];
+  for (let node of nodes) {
+    let tempNodes = allNodes[node].child;
+    chNodes.push(...tempNodes);
+  }
+  if(chNodes.length === 0) return tree;
+  tree.push(chNodes);
+  return makeGraph(allNodes, chNodes, tree);
+}
+const graph = [];
+let resultGraph = makeGraph(copyNodes,["Приветствие"], graph)
+console.log("exit", resultGraph.length );
+console.log("exit", resultGraph[1] );
+console.log("exit", resultGraph[2] );
+export default allNodes;

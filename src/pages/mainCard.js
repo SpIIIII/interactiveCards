@@ -5,11 +5,6 @@ import allNodes from "../backend/graphs"
 
 
 function MainCard() {
-  useEffect( ()=>{
-    console.log("in card", allNodes)
-  }
-  )
-
   return (
     <div className=" col-sm-10 mainCard">
       {/* <div className="mainCard col-sm-10"> */}
