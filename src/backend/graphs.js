@@ -15,7 +15,5 @@ function makeGraph(allNodes, nodes, tree) {
 }
 const graph = [];
 let resultGraph = makeGraph(copyNodes,["Приветствие"], graph)
-console.log("exit", resultGraph.length );
-console.log("exit", resultGraph[1] );
-console.log("exit", resultGraph[2] );
+
 export default allNodes;
