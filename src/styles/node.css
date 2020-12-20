@@ -1,29 +1,39 @@
 .nodeResponse {
-    /* height: 150px; */
-    width: 310px;
-    margin: 10px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  .nodeRequest {
-    height: 75px;
-    width: 210px;
-    margin: 10px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-  }
-
-.node{
-    padding: 15px 0;
+  /* height: 150px; */
+  max-width: 300px;
+  margin: 10px;
+  background-color: rgba(32, 178, 170, 0.15);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+.nodeFact {
+  height: 75px;
+  max-width: 200px;
+  margin: 10px;
+  background-color: rgba(250, 250, 210, 0.7);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.node_header_color{
-    color: #6C757D;
-    font-size: 1.1rem;
+.nodeАсt {
+  height: 75px;
+  max-width: 210px;
+  margin: 10px;
+  /* background-color: rgba(144, 238, 144, 0.7); */
+  background-color: rgba(178, 34, 34, 0.13);
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
-.node_text_color{
-    color: #6c757d;
-    font-size:0.9rem;
+
+.node {
+  padding: 15px 10px;
+}
+
+.node_header_color {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+.node_text_color {
+  color: #6c757d;
+  font-size: 0.9rem;
 }
