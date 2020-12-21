@@ -8,6 +8,13 @@ function NodeResp(props) {
     </div>
   );
 }
+function NodeReq(props) {
+  return (
+    <div className="nodeReq col-md-auto node">
+      <span className=" header_style node_header_color">{props.title}</span>
+    </div>
+  );
+}
 function NodeFact(props) {
   return (
     <div className="col-md-auto nodeFact node">
@@ -30,6 +37,8 @@ function Node(props) {
     return <NodeFact title={props.title} />;
   } else if (props.type === 3) {
     return <NodeАсt title={props.title} />;
+  } else if (props.type === 4) {
+    return <NodeReq title={props.title} />;
   }
 }
 
