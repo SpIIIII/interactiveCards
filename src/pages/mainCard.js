@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Node from "./nodes/nodes";
 import allNodes from "../backend/nodes";
-import resultGraph from "../backend/graphs";
+import {resultGraph, ecxlNodes} from "../backend/graphs";
 
 function MainCard() {
+  useState(()=>{
+    console.log("render")
+  },[ecxlNodes])
   let rows = [];
   for (let r of resultGraph) {
     let nods = [];

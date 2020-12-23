@@ -35,7 +35,17 @@
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.nodeHovered{
+  scale: 1.05;
+}
+
+.nodeSelected{
+  scale: 1.05;
+}
+
+
 .node {
+  transition: all 0.2s;
   padding: 15px 10px;
 }
 
@@ -47,3 +57,4 @@
   color: #6c757d;
   font-size: 0.9rem;
 }
+
