@@ -28,7 +28,7 @@ function Node(props) {
   return (
     <div className={classes} onMouseEnter={hovered} onClick={x => {props.exNode(x); selected(x); props.upd()}} onMouseLeave={hovered} ref={thisElRef}>
       <span className=" header_style node_header_color">{props.title}</span>
-      <span className="node_text_color text_style">{props.text}</span>
+      <div className="node_text_color text_style">{props.text}</div>
     </div>
   );
 }
