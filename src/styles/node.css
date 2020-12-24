@@ -45,7 +45,7 @@
 
 
 .node {
-  transition: all 0.2s;
+  transition: all   0.15s cubic-bezier(.57,.13,.53,.93);
   padding: 15px 10px;
 }
 
