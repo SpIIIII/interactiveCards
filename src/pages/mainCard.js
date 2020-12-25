@@ -21,6 +21,7 @@ function MainCard() {
   
   function excludeNodes(node){
     let n = node.target.textContent
+    console.log(node.target)
     if (ecxlNodes.includes(n)) {
       ecxlNodes = ecxlNodes.filter(x => x!==n)
     } 

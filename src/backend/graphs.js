@@ -5,11 +5,14 @@ const copyNodes = { ...allNodes };
 
 function makeGraph(allNodes, nodes, tree, excl = []) {
   let chNodes = [];  
+  // console.log(nodes)
   for (let e of excl){
     if (nodes.includes(e)){
       nodes = nodes.filter(x => excl.includes(x))
     }
-  }
+  } 
+  // console.log("excl", excl)
+  // console.log(nodes)
 
   for (let node of nodes) {
     let tempNodes = []
@@ -18,7 +21,7 @@ function makeGraph(allNodes, nodes, tree, excl = []) {
   }
   if (chNodes.length === 0) return tree;
 
-  tree.push(chNodes);
+  tree.push(new Set(chNodes));
   return makeGraph(allNodes, chNodes, tree, excl);
 }
 // const graph = [];
