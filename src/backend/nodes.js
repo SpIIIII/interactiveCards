@@ -1,3 +1,18 @@
+class Node {
+  constructor(tytle, text="", childs = [], parents = []) {
+    this.tytle = tytle;
+    this.text = text;
+    this.childs = childs;
+    this.parents = parents;
+  }
+  addChild(child) {
+    this.childs.push(child);
+  }
+  addParent(parent) {
+    this.parents.push(parent);
+  }
+}
+
 const speachNodes = {
   Приветствие: {
     child: [
@@ -92,4 +107,4 @@ const actNodes = {
 
 const allNodes = { ...speachNodes, ...actNodes, ...factNodes, ...reqNodes };
 
-export default allNodes;
+export { allNodes, Node };

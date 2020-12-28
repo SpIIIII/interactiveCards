@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Node from "./nodes/nodes";
-import allNodes from "../backend/nodes";
+import {allNodes} from "../backend/nodes";
 import {makeGraph } from "../backend/graphs";
 
 
