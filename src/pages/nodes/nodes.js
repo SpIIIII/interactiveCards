@@ -1,5 +1,4 @@
-import React, {useRef, useState} from "react";
-// import {excludeNodes} from "../mainCard"
+import React, {useRef, } from "react";
 
 
 function Node(props) {
@@ -8,10 +7,7 @@ function Node(props) {
     if (thisElRef.current.classList.contains("nodeHovered"))  thisElRef.current.classList.remove("nodeHovered")
     else thisElRef.current.classList.add("nodeHovered")
   } 
-  function useForceUpdate(){
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue(value => ++value); // update the state to force render
-  }
+
   const selected = (x)=>{
     if (thisElRef.current.classList.contains("nodeSelected"))  {
       

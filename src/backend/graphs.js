@@ -28,23 +28,18 @@ class Graph {
   }
 
   isChildAdd(floor, child) {
-    let rule1,
-      rule2 = false;
     for (let nod of floor) {
-      if (nod.isEqual(child)) {
-        rule1 = true;
-        break;
-      }
+      if (nod.isEqual(child)) return true
     }
-    console.log(child.strParents());
-    return rule1;
+    return false;
   }
 
   populating() {
     this.addChilds(this.root);
     return this.root;
   }
-  *getFloor(exclNodes) {
+  
+  *getFloors() {
     let floor = [this.root];
     while (floor.length > 0) {
       yield floor;
@@ -58,19 +53,34 @@ class Graph {
       }
     }
   }
+  getFloor(parents=[]) {
+      let childs = [];
+      let tempChilds = []
+      for (let nod of parents) {
+          tempChilds.push(...nod.childs);
+      }
+      for (let nod of tempChilds) {
+        if (!this.isChildAdd(childs, nod)) childs.push(nod);
+      }
+      return childs
+  }
+
   *represente(exclNodes = []) {
     this.exclNodes = exclNodes;
-    let it = this.getFloor(exclNodes);
-    for (let i of it) {
-      if (!exclNodes.includes(i.tytpe)) {
-        let ret = i.map((x) => ({
-          tytle: x.tytle,
-          text: x.text,
-          type: x.type
-        }));
-        console.log(ret);
-        yield ret;
-      }
+    let parents = [this.root]
+    
+    let childs = []
+    yield parents
+    while(parents.length>0){
+      
+      childs = this.getFloor(parents)
+      yield childs
+        let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
+        console.log("inter", intercept)
+        if (intercept.length>0){
+          childs=childs.filter(x=>intercept.includes(x.tytle  ))
+        }
+        parents = childs
     }
   }
 }

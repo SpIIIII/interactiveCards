@@ -36,11 +36,11 @@
 }
 
 .nodeHovered{
-  scale: 0.95;
+  -webkit-transform: scale(0.98);
 }
 
 .nodeSelected{
-  scale: 0.95;
+  -webkit-transform: scale(0.98);
   box-shadow: inset 5px 5px 10px rgba(0,0,0,0.15);
 }
 

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Node from "./nodes/nodes";
 import { allNodes } from "../backend/nodes";
-import { makeGraph, Graph } from "../backend/graphs";
+import {  Graph } from "../backend/graphs";
 
 let ecxlNodes = [];
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
-  return () => setValue((value) => ++value); // update the state to force render
+  return () => setValue(value => ++value); // update the state to force render
 }
 
 function MainCard() {
