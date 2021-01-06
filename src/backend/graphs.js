@@ -72,15 +72,13 @@ class Graph {
     let childs = []
     yield parents
     while(parents.length>0){
-      
       childs = this.getFloor(parents)
       yield childs
-        let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
-        console.log("inter", intercept)
-        if (intercept.length>0){
-          childs=childs.filter(x=>intercept.includes(x.tytle  ))
-        }
-        parents = childs
+      let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
+      if (intercept.length>0){
+        childs=childs.filter(x=>intercept.includes(x.tytle  ))
+      }
+      parents = childs
     }
   }
 }

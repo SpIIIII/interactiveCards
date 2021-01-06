@@ -18,6 +18,10 @@ class Node {
   strParents() {
     return [this.parents.map((x) => x.tytle)];
   }
+  isAllParents(parents=[]){
+    if (this.strParents().every(t => parents.includes(t))) return true
+    return false
+  }
 }
 
 const speachNodes = {
