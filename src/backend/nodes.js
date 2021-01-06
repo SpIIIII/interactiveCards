@@ -1,7 +1,8 @@
 class Node {
-  constructor(tytle, text="", childs = [], parents = []) {
+  constructor(tytle, text = "", type = 0, childs = [], parents = []) {
     this.tytle = tytle;
     this.text = text;
+    this.type = type;
     this.childs = childs;
     this.parents = parents;
   }
@@ -10,6 +11,12 @@ class Node {
   }
   addParent(parent) {
     this.parents.push(parent);
+  }
+  isEqual(node) {
+    return node.tytle === this.tytle;
+  }
+  strParents() {
+    return [this.parents.map((x) => x.tytle)];
   }
 }
 
