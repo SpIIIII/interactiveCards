@@ -16,11 +16,12 @@ class Node {
     return node.tytle === this.tytle;
   }
   strParents() {
-    return [this.parents.map((x) => x.tytle)];
+    return this.parents.map((x) => x.tytle);
   }
   isAllParents(parents=[]){
-    if (this.strParents().every(t => parents.includes(t))) return true
-    return false
+    let test =  this.strParents().every(t => parents.includes(t))
+    console.log(this.tytle, parents, this.strParents(), test)
+    return test
   }
 }
 
@@ -83,7 +84,7 @@ const factNodes = {
     text: "",
     type: 2
   },
-  "IPoE абонент": { child: [], text: "", type: 2 },
+  "IPoE абонент": { child: ["TEST"], text: "", type: 2 },
   "PPPoE абонент": { child: [], text: "", type: 2 },
   "GPON абонент": { child: [], text: "", type: 2 },
   "Подключен оптикой": { child: [], text: "", type: 2 },
@@ -97,14 +98,15 @@ const factNodes = {
     type: 2
   },
   "Проверить индикацию роутера": {
-    child: ["wifi включен", "wifi выключен", "Линк есть", "Линка нет"],
+    child: ["wifi включен", "wifi выключен", "Линк есть", "Линка нет", "TEST"],
     text: "",
     type: 2
   },
   "wifi включен": { child: [], text: "", type: 2 },
   "wifi выключен": { child: [], text: "", type: 2 },
   "Линк есть": { child: [], text: "", type: 2 },
-  "Линка нет": { child: [], text: "", type: 2 }
+  "Линка нет": { child: [], text: "", type: 2 },
+  "TEST": { child: [], text: "", type: 2 },
 };
 
 const actNodes = {

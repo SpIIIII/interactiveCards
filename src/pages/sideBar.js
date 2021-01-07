@@ -32,7 +32,9 @@ function SideBarPunct() {
 
 function SideBar() {
   return (
-    <div className="sideBar col-sm-2">
+    <>
+    <div className="fakeBar col-sm-2"></div>
+    <div className="sideBar sideBarFixed col-sm-2">
       <ul className="barText header_style">
         <li>
           <SideBarPunct />
@@ -54,6 +56,7 @@ function SideBar() {
         </li>
       </ul>
     </div>
+    </>
   );
 }
 

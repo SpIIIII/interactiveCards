@@ -19,15 +19,18 @@
   background-color: #fafbfe;
 }
 
-
-
 .sideBar {
   height: 100vh;
   /* width: 20vw; */
-  /* position: absolute; */
   background-color: #313a46;
 }
-
+.sideBarFixed{
+  position:fixed;
+}
+.fakeBar{
+  height: 100vh;
+  background-color: #313a46;
+}
 ul {
   padding: 7vh 0;
   list-style-type: none;

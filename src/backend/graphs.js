@@ -3,6 +3,7 @@ import { Node } from "./nodes";
 class Graph {
   constructor(nodes) {
     this.nodes = nodes;
+    this.usedNodes = [];
     this.tree = ["Приветствие"];
     this.depth = 0;
     this.root = new Node(
@@ -14,17 +15,27 @@ class Graph {
   }
 
   nodefy(node, parentNode) {
-    let newNode = new Node(node);
-    newNode.addParent(parentNode);
-    this.addChilds(newNode);
-    return newNode;
+      let newNode = new Node(node);
+      newNode.addParent(parentNode);
+      this.addChilds(newNode);
+      this.usedNodes.push(node)
+      return newNode;
+ 
   }
   addChilds(parentNode) {
     let tempChilds = this.nodes[parentNode.tytle].child;
     parentNode.type = this.nodes[parentNode.tytle].type;
     for (let child of tempChilds) {
-      parentNode.addChild(this.nodefy(child, parentNode));
+      if(!this.usedNodes.includes(child)){
+
+        parentNode.addChild(this.nodefy(child, parentNode));
+      }
     }
+  }
+
+  populating() {
+    this.addChilds(this.root);
+    return this.root;
   }
 
   isChildAdd(floor, child) {
@@ -33,12 +44,7 @@ class Graph {
     }
     return false;
   }
-
-  populating() {
-    this.addChilds(this.root);
-    return this.root;
-  }
-  
+ 
   *getFloors() {
     let floor = [this.root];
     while (floor.length > 0) {
@@ -68,7 +74,6 @@ class Graph {
   *represente(exclNodes = []) {
     this.exclNodes = exclNodes;
     let parents = [this.root]
-    
     let childs = []
     yield parents
     while(parents.length>0){
@@ -76,7 +81,8 @@ class Graph {
       yield childs
       let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
       if (intercept.length>0){
-        childs=childs.filter(x=>intercept.includes(x.tytle  ))
+        childs=childs.filter(x=>intercept.includes(x.tytle))
+        // childs=childs.filter(x=>x.isAllParents(this.exclNodes))
       }
       parents = childs
     }

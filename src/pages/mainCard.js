@@ -23,7 +23,6 @@ function MainCard() {
     } else ecxlNodes.push(n);
   }
   const graph_ = new Graph(allNodes);
-
   for (let r of graph_.represente(ecxlNodes)) {
     let nods = [];
     for (let i of r) {
@@ -41,7 +40,7 @@ function MainCard() {
       <div className="row justify-content-center rowModule">{nods}</div>
     );
   }
-  return <div className=" col-sm-10 mainCard">{rows}</div>;
+  return <div className=" col-sm-10 mainCard" id="mainC">{rows}</div>;
 }
 
 export { MainCard };
