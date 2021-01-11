@@ -13,7 +13,7 @@
   position: relative;
   /* width: 100vw; */
   height: 100vh;
-  font-family: sans-serif;
+  font-family: 'Nunito', sans-serif;
   text-align: center;
 
   background-color: #fafbfe;
@@ -40,7 +40,7 @@ li {
 }
 
 .barText {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #8391a2;
   transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.4s;
 }

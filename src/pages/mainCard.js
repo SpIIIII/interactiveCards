@@ -3,7 +3,7 @@ import Node from "./nodes/nodes";
 import { allNodes } from "../backend/nodes";
 import {  Graph } from "../backend/graphs";
 
-let ecxlNodes = [];
+let ecxlNodes = ["Приветствие"];
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
@@ -12,8 +12,6 @@ function useForceUpdate() {
 
 function MainCard() {
   let rows = [];
-  const graph = [];
-  graph.push(["Приветствие"]);
   const forceUpdate = useForceUpdate();
 
   function excludeNodes(node) {

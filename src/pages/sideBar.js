@@ -25,7 +25,7 @@ function SideBarPunct() {
       onMouseLeave={makeUnSelect}
       ref={thisElRef}
     >
-      test 1
+      тест 1
     </div>
   );
 }

@@ -3,33 +3,36 @@ import { Node } from "./nodes";
 class Graph {
   constructor(nodes) {
     this.nodes = nodes;
-    this.usedNodes = [];
-    this.tree = ["Приветствие"];
     this.depth = 0;
     this.root = new Node(
       "Приветствие",
       "Здравствуйте это компания Feonet, оператор _____ чем могу помочь"
     );
-    this.populating();
     this.exclNodes = [];
+    this.cash = {"Приветствие": this.root}
+    this.populating();
   }
 
   nodefy(node, parentNode) {
+    if(this.findNodeByTytle(node, parentNode)!==undefined){
+      let newNode = this.findNodeByTytle(node, parentNode)
+      newNode.addParent(parentNode)
+      return newNode
+    }else{
       let newNode = new Node(node);
       newNode.addParent(parentNode);
       this.addChilds(newNode);
-      this.usedNodes.push(node)
-      return newNode;
- 
+      this.cash[node] = newNode
+      return newNode; 
+    }
+      
   }
+
   addChilds(parentNode) {
     let tempChilds = this.nodes[parentNode.tytle].child;
     parentNode.type = this.nodes[parentNode.tytle].type;
     for (let child of tempChilds) {
-      if(!this.usedNodes.includes(child)){
-
         parentNode.addChild(this.nodefy(child, parentNode));
-      }
     }
   }
 
@@ -38,11 +41,24 @@ class Graph {
     return this.root;
   }
 
-  isChildAdd(floor, child) {
-    for (let nod of floor) {
-      if (nod.isEqual(child)) return true
+  findNodeByTytle(tytle, startNode){
+    if (Object.keys(this.cash).includes(tytle)) return this.cash[tytle]
+    let parent = startNode
+    for (let child of parent.childs){
+      if(child.tytle === tytle) {
+        return child
+      } 
+      if (child.childs.length>0) return this.findNodeByTytle(tytle, child)
+      else continue
+    }    
+  }
+
+  isChildAdd(child) {
+    if (child.added) return false
+    else{
+      child.added = true
+      return true
     }
-    return false;
   }
  
   *getFloors() {
@@ -55,10 +71,11 @@ class Graph {
       }
       floor = [];
       for (let nod of tempNodes) {
-        if (!this.isChildAdd(floor, nod)) floor.push(nod);
+        if (!this.isChildAdd(nod)) floor.push(nod);
       }
     }
   }
+
   getFloor(parents=[]) {
       let childs = [];
       let tempChilds = []
@@ -66,7 +83,7 @@ class Graph {
           tempChilds.push(...nod.childs);
       }
       for (let nod of tempChilds) {
-        if (!this.isChildAdd(childs, nod)) childs.push(nod);
+        if (this.isChildAdd(nod)) childs.push(nod);
       }
       return childs
   }
@@ -78,11 +95,11 @@ class Graph {
     yield parents
     while(parents.length>0){
       childs = this.getFloor(parents)
+      childs=childs.filter(x=>x.isAllParents(this.exclNodes))
       yield childs
       let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
       if (intercept.length>0){
         childs=childs.filter(x=>intercept.includes(x.tytle))
-        // childs=childs.filter(x=>x.isAllParents(this.exclNodes))
       }
       parents = childs
     }

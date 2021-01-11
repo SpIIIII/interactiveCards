@@ -5,6 +5,7 @@ class Node {
     this.type = type;
     this.childs = childs;
     this.parents = parents;
+    this.added = false;
   }
   addChild(child) {
     this.childs.push(child);
@@ -19,9 +20,14 @@ class Node {
     return this.parents.map((x) => x.tytle);
   }
   isAllParents(parents=[]){
-    let test =  this.strParents().every(t => parents.includes(t))
-    console.log(this.tytle, parents, this.strParents(), test)
-    return test
+    let result
+    // console.log(this.tytle, parents, this.strParents() )
+    if (this.strParents().length > 1){
+      result = this.strParents().every(t => parents.includes(t))
+    } 
+    else result=true 
+    // console.log(result)
+    return result
   }
 }
 
