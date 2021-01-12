@@ -53,11 +53,19 @@ class Graph {
     }    
   }
 
-  isChildAdd(child) {
-    if (child.added) return false
-    else{
-      child.added = true
+  resetNodesAd(){
+    for (let node of Object.values(this.cash)){
+      node.added = false
+    }
+  }
+
+  isNodAdded(node){
+    if (node.added){
       return true
+    }
+    else{
+      node.added = true
+      return false
     }
   }
  
@@ -71,25 +79,25 @@ class Graph {
       }
       floor = [];
       for (let nod of tempNodes) {
-        if (!this.isChildAdd(nod)) floor.push(nod);
+        if (!this.isNodAdded(nod)) floor.push(nod);
       }
     }
   }
 
-  getFloor(parents=[]) {
+  getFloor(parents=[]) { 
+    this.resetNodesAd()   
       let childs = [];
       let tempChilds = []
       for (let nod of parents) {
           tempChilds.push(...nod.childs);
       }
       for (let nod of tempChilds) {
-        if (this.isChildAdd(nod)) childs.push(nod);
+        if (!this.isNodAdded(nod)) childs.push(nod);
       }
       return childs
   }
 
-  *represente(exclNodes = []) {
-    this.exclNodes = exclNodes;
+  *represente() {
     let parents = [this.root]
     let childs = []
     yield parents
@@ -102,7 +110,12 @@ class Graph {
         childs=childs.filter(x=>intercept.includes(x.tytle))
       }
       parents = childs
+      
     }
+  }
+
+  excludeNodes(exclNodes=[]){
+    this.exclNodes = exclNodes
   }
 }
 

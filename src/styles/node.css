@@ -3,7 +3,6 @@
   max-width: 300px;
   margin: 10px;
   background-color: rgba(0, 255, 153, 0.1);
-  border-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 .nodeFact {
@@ -11,7 +10,6 @@
   max-width: 200px;
   margin: 10px;
   background-color: rgba(255, 223, 0, 0.15);
-  border-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -21,7 +19,6 @@
   margin: 10px;
   /* background-color: rgba(144, 238, 144, 0.7); */
   background-color: rgba(255, 145, 97, 0.15);
-  border-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,7 +28,6 @@
   margin: 10px;
   /* background-color: rgba(144, 238, 144, 0.7); */
   background-color: rgba(0, 204, 255, 0.15);
-  border-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,13 +37,15 @@
 
 .nodeSelected{
   -webkit-transform: scale(0.98);
-  box-shadow: inset 5px 5px 10px rgba(0,0,0,0.15);
+  box-shadow: inset 5px 5px 10px rgba(87, 87, 87, 0.15);
 }
 
 
 .node {
   transition: all   0.15s cubic-bezier(.57,.13,.53,.93);
   padding: 15px 10px;
+
+  border-radius: 5px;
   font-family: 'Nunio', cursive;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
