@@ -1,0 +1,70 @@
+
+  ul {
+    list-style-type: none;
+  }
+  li {
+    margin: 10px 0;
+  }
+  .fakeBar{
+    
+    height: 100vh;
+    background-color: #313a46;
+  }
+.sideBar {
+    height: 100vh;
+    /* width: 200px; */
+    padding-top: 70px;
+    background-color: #313a46;
+  }
+  .sideBarFixed{
+    position:fixed;
+  }
+
+  .sideBarPunkts{
+
+  }
+  .sideBarPunkt{
+    width: 100%;
+    padding: 0 15px;
+    text-align: left;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.8s;
+    cursor: pointer;
+  }
+  .sideBarSubPunkts{
+    display:none;
+    cursor: pointer;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
+  }
+  .sideBarSubPunkt{
+    text-align: left;
+    padding-left: 19px;
+    font-size: 1.05rem;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.8s
+  }
+  .sideBarPunktIcon{
+    margin:0 10px;
+    width: 100px;
+  }
+  .sideBarArrow{
+    transform: translateY(4px);
+    float: right;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
+  }
+  .sideBarArrowSelected{
+    transform: rotate(90deg);
+  }
+  .FAArrow{
+    scale:0.7;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
+  }
+  .barText {
+    font-size: 1.1rem;
+    color: #8391a2;
+  }
+  .barTextPreSelect {
+    color: #bccee4;
+  }
+  .barTextSelect {
+    font-size: 1.1rem;
+    color: #fbfbfb;
+  }

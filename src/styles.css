@@ -1,6 +1,7 @@
 @import "styles/common.css";
 @import "styles/node.css";
 @import "styles/mainCard.css";
+@import "styles/sideBar.css";
 
 * {
   margin: 0;
@@ -19,40 +20,6 @@
   background-color: #fafbfe;
 }
 
-.sideBar {
-  height: 100vh;
-  /* width: 20vw; */
-  background-color: #313a46;
-}
-.sideBarFixed{
-  position:fixed;
-}
-.fakeBar{
-  height: 100vh;
-  background-color: #313a46;
-}
-ul {
-  padding: 7vh 0;
-  list-style-type: none;
-}
-li {
-  margin: 10px 0;
-}
-
-.barText {
-  font-size: 1.1rem;
-  color: #8391a2;
-  transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.4s;
-}
-.barTextPreSelect {
-  color: #bccee4;
-  transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.4s;
-}
-.barTextSelect {
-  font-size: 1.2rem;
-  color: #fbfbfb;
-  transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.4s;
-}
 
 .mainCardContainer {
   background-color: tomato;
