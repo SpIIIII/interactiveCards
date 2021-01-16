@@ -114,8 +114,15 @@ class Graph {
     }
   }
 
-  excludeNodes(exclNodes=[]){
-    this.exclNodes = exclNodes
+  excludeNodes(exclNodes = []) {
+    for (let nod of Object.values(this.cash)) {
+      if (exclNodes.includes(nod.tytle)) {
+        nod.excluded = true;
+      } else {
+        nod.excluded = false;
+      }
+    }
+    this.exclNodes = exclNodes;
   }
 }
 

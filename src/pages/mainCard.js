@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Node from "./nodes/nodes";
-// import { allNodes } from "../backend/nodes";
-// import {  Graph } from "../backend/graphs";
 
 let ecxlNodes = ["Приветствие"];
+
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
@@ -29,6 +28,7 @@ function GraphWrapper(props){
           title={i.tytle}
           type={i.type}
           text={i.text}
+          excl={i.excluded}
           exNode={excludeNodes}
           upd={forceUpdate}
         />
@@ -38,16 +38,18 @@ function GraphWrapper(props){
       <div className="row justify-content-center rowModule">{nods}</div>
     );
   }
-  return <div className=" col-sm-10 mainCard" id="mainC">{rows}</div>;
+  return <>
+    <div className=" col-sm-10 mainCard" id="mainC">{rows}</div>;
+  </> 
 
 }
 
 function MainCard(props) {
   return (
     <>
-    <GraphWrapper graph={props.graph}/>
+      <GraphWrapper graph={props.graph}/>
     </>
   )
 }
 
-export { MainCard };
+export { MainCard, useForceUpdate };

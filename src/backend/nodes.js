@@ -6,6 +6,7 @@ class Node {
     this.childs = childs;
     this.parents = parents;
     this.added = false;
+    this.excluded = false;
   }
   addChild(child) {
     this.childs.push(child);

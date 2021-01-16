@@ -1,28 +1,30 @@
-import React, {useRef, } from "react";
-
+import React, { useRef } from "react";
 
 function Node(props) {
-  const thisElRef = useRef()
-  const hovered = ()=>{
-    if (thisElRef.current.classList.contains("nodeHovered"))  thisElRef.current.classList.remove("nodeHovered")
-    else thisElRef.current.classList.add("nodeHovered")
-  } 
+  const thisElRef = useRef();
+  const hoveredOn = (x) => {
+    x.currentTarget.classList.add("nodeHovered")
+  };
 
-  const selected = (x)=>{
-    if (thisElRef.current.classList.contains("nodeSelected"))  {
-      
-      thisElRef.current.classList.remove("nodeSelected")
-    }
-    else {
-      thisElRef.current.classList.add("nodeSelected")
-    } 
-    // excludeNodes(x.target.textContent)
-  }
-  const cl = ["nodeResponse", "nodeFact", "nodeАсt", "nodeReq" ]
-  let classes = "col-md-auto node " + cl[props.type-1]
+  const hoveredOff = (x) => {
+    x.currentTarget.classList.remove("nodeHovered")
+  };
+
+  const cl = ["nodeResponse", "nodeFact", "nodeАсt", "nodeReq"];
+  let sel = props.excl ? " nodeSelected" : " ";
+  let classes = "col-md-auto node " + cl[props.type - 1] + sel;
 
   return (
-    <div className={classes} onMouseEnter={hovered} onClick={x => {props.exNode(x); selected(x); props.upd()}} onMouseLeave={hovered} ref={thisElRef}>
+    <div
+      className={classes}
+      onMouseEnter={hoveredOn}
+      onMouseLeave={hoveredOff}
+      onClick={(x) => {
+        props.exNode(x);
+        props.upd();
+      }}
+      ref={thisElRef}
+    >
       <span className=" header_style node_header_color">{props.title}</span>
       <div className="node_text_color text_style">{props.text}</div>
     </div>

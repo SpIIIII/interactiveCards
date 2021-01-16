@@ -21,13 +21,13 @@
   }
 
   .sideBarPunkts{
-
+    margin-bottom: 20px;
   }
   .sideBarPunkt{
     width: 100%;
     padding: 0 15px;
     text-align: left;
-    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.8s;
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.7s;
     cursor: pointer;
   }
   .sideBarSubPunkts{
@@ -39,7 +39,7 @@
     text-align: left;
     padding-left: 19px;
     font-size: 1.05rem;
-    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.8s
+    transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.7s
   }
   .sideBarPunktIcon{
     margin:0 10px;

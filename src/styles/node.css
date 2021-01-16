@@ -2,24 +2,24 @@
   /* height: 150px; */
   max-width: 300px;
   margin: 10px;
-  background-color: rgba(0, 255, 153, 0.1);
+  background-color: rgba(106, 168, 72, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 .nodeFact {
   height: 75px;
   max-width: 200px;
   margin: 10px;
-  background-color: rgba(255, 223, 0, 0.15);
+  background-color: rgba(221, 209, 115, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nodeАсt {
+  color: rgb(55, 64, 79);
   height: 75px;
   max-width: 210px;
   margin: 10px;
-  /* background-color: rgba(144, 238, 144, 0.7); */
-  background-color: rgba(255, 145, 97, 0.15);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(224, 50, 2, 0.5);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nodeReq {
@@ -27,7 +27,7 @@
   max-width: 210px;
   margin: 10px;
   /* background-color: rgba(144, 238, 144, 0.7); */
-  background-color: rgba(0, 204, 255, 0.15);
+  background-color: rgba(53, 158, 180, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -37,7 +37,7 @@
 
 .nodeSelected{
   -webkit-transform: scale(0.98);
-  box-shadow: inset 5px 5px 10px rgba(87, 87, 87, 0.15);
+  box-shadow: inset 5px 5px 10px rgba(87, 87, 87, 0.2);
 }
 
 
@@ -56,7 +56,7 @@
 }
 
 .node_header_color {
-  color: #6c757d;
+  color: #646c74;
   font-size: 1em;
 }
 .node_text_color {
@@ -64,3 +64,7 @@
   font-size: 0.8em;
 }
 
+.tempButton{
+  position: absolute;
+  left: -28vw;
+}
