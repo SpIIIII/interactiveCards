@@ -1,14 +1,27 @@
+.node {
+  transition: all   0.15s cubic-bezier(.57,.13,.53,.93);
+  padding: 10px 10px;
+  margin: 10px;
+  border-radius: 5px;
+  font-family: 'Nunio', cursive;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .nodeResponse {
   /* height: 150px; */
   max-width: 300px;
-  margin: 10px;
+  
   background-color: rgba(106, 168, 72, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 .nodeFact {
   height: 75px;
   max-width: 200px;
-  margin: 10px;
   background-color: rgba(221, 209, 115, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -16,8 +29,8 @@
 .nodeАсt {
   color: rgb(55, 64, 79);
   height: 75px;
-  max-width: 210px;
-  margin: 10px;
+  max-width: 300px;
+  
   background-color: rgba(224, 50, 2, 0.5);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -25,7 +38,7 @@
 .nodeReq {
   height: 75px;
   max-width: 210px;
-  margin: 10px;
+  
   /* background-color: rgba(144, 238, 144, 0.7); */
   background-color: rgba(53, 158, 180, 0.2);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
@@ -41,19 +54,7 @@
 }
 
 
-.node {
-  transition: all   0.15s cubic-bezier(.57,.13,.53,.93);
-  padding: 15px 10px;
 
-  border-radius: 5px;
-  font-family: 'Nunio', cursive;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
 .node_header_color {
   color: #646c74;

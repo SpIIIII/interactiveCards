@@ -14,23 +14,23 @@ class Graph {
   }
 
   nodefy(node, parentNode) {
+    let newNode
     if(this.findNodeByTytle(node, parentNode)!==undefined){
-      let newNode = this.findNodeByTytle(node, parentNode)
-      newNode.addParent(parentNode)
-      return newNode
+      newNode = this.findNodeByTytle(node, parentNode)      
     }else{
-      let newNode = new Node(node);
-      newNode.addParent(parentNode);
+      newNode = new Node(node);
       this.addChilds(newNode);
       this.cash[node] = newNode
-      return newNode; 
     }
-      
+    
+    newNode.addParent(parentNode)
+    return newNode
   }
 
   addChilds(parentNode) {
     let tempChilds = this.nodes[parentNode.tytle].child;
     parentNode.type = this.nodes[parentNode.tytle].type;
+    parentNode.multiParetn = this.nodes[parentNode.tytle].multiP
     for (let child of tempChilds) {
         parentNode.addChild(this.nodefy(child, parentNode));
     }
