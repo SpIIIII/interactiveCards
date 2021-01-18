@@ -116,7 +116,6 @@ function SideBar(props) {
   const barSize = useWindowSize()[0] > 880 ? "sideBarOrdinar" : "sideBarSmall";
   const barPunctSize = useWindowSize()[0] > 880 ? 0 : 1;
   const classNmaes = " barText header_style sideBarFixed sideBar " + barSize;
-  console.log(classNmaes);
   return (
     <>
       <div className="fakeBar col-sm-2"></div>

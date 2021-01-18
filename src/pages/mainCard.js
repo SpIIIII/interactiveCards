@@ -10,18 +10,19 @@ function useForceUpdate() {
 }
 
 function GraphWrapper(props){
-  let rows = [];
+  const rows = [];
   const forceUpdate = useForceUpdate();
 
   function excludeNodes(node) {
-    let n = node.target.textContent;
+    const n = node.target.textContent;
     if (ecxlNodes.includes(n)) {
       ecxlNodes = ecxlNodes.filter((x) => x !== n);
     } else ecxlNodes.push(n);
     props.graph.excludeNodes(ecxlNodes)
   }
-  for (let node of props.graph.represente()) {
-    let nods = [];
+  for (let pair of props.graph.represente()) {
+    const node = pair[0]
+    const nods = [];
     for (let i of node) {
       nods.push(
         <Node
@@ -34,8 +35,10 @@ function GraphWrapper(props){
         />
       );
     }
+    // const selected = pair[1] ? " selectedRowModule" : ""
+    const classes = "row justify-content-center rowModule "
     rows.push(
-      <div className="row justify-content-center rowModule">{nods}</div>
+      <div className={classes}>{nods}</div>
     );
   }
   return <>

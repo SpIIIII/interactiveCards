@@ -38,7 +38,7 @@ class Graph {
 
   populating() {
     this.addChilds(this.root);
-    return this.root;
+    // return this.root;
   }
 
   findNodeByTytle(tytle, startNode){
@@ -85,7 +85,7 @@ class Graph {
   }
 
   getFloor(parents=[]) { 
-    this.resetNodesAd()   
+      
       let childs = [];
       let tempChilds = []
       for (let nod of parents) {
@@ -98,15 +98,19 @@ class Graph {
   }
 
   *represente() {
+    this.resetNodesAd() 
     let parents = [this.root]
     let childs = []
-    yield parents
+    let selected = false
+    yield [parents, selected]
     while(parents.length>0){
       childs = this.getFloor(parents)
       childs=childs.filter(x=>x.isAllParents(this.exclNodes))
-      yield childs
+      yield [childs, selected]
+      selected = false
       let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
       if (intercept.length>0){
+        selected=true
         childs=childs.filter(x=>intercept.includes(x.tytle))
       }
       parents = childs

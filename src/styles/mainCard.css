@@ -5,5 +5,9 @@
   }
 
   .rowModule{
-    margin:50px 0;
+    margin:60px 0;
+  }
+
+  .selectedRowModule{
+    box-shadow: inset 0px 20px 10px black;
   }
