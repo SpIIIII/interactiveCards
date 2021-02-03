@@ -32,6 +32,7 @@ function GraphWrapper(props){
           excl={i.excluded}
           exNode={excludeNodes}
           upd={forceUpdate}
+          parents={i.parents.map((x) => x.tytle)}
         />
       );
     }
@@ -48,9 +49,14 @@ function GraphWrapper(props){
 }
 
 function MainCard(props) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "path")    
+      svg.setAttributeNS(null, "d", `M 0 0 C 20 20,  100 100, 200 200`)
   return (
     <>
       <GraphWrapper graph={props.graph}/>
+      <svg className="node_leash">
+        <path d="M 0 0 C 20 20,  100 100, 200 200" fill="black"></path>
+      </svg>
     </>
   )
 }

@@ -30,7 +30,7 @@
 }
 
 .nodeАсt {
-  color: rgb(55, 64, 79);
+  color: black; /*rgb(55, 64, 79);*/
   
   background-color: rgba(224, 50, 2, 0.5);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);

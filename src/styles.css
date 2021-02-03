@@ -2,6 +2,7 @@
 @import "styles/node.css";
 @import "styles/mainCard.css";
 @import "styles/sideBar.css";
+@import "styles/temp.css"
 
 * {
   margin: 0;
