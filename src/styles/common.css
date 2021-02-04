@@ -13,3 +13,18 @@
   -ms-user-select: none;
   user-select: none;
 }
+.node_leash {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.path_leash {
+  stroke: black;
+  width: 5px;
+  z-index: 9;
+  fill: none;
+}

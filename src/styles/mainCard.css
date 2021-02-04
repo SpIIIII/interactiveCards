@@ -2,6 +2,7 @@
     height: 100%;
     padding-top: 5vh;
     background-color: #fafbfe;
+    /* z-index: 10; */
   }
 
   .rowModule{
