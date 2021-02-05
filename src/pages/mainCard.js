@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import Node from "./nodes/nodes";
 
 let ecxlNodes = ["Приветствие"];
-const leases = []
+const leashes = []
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
@@ -11,8 +12,6 @@ function useForceUpdate() {
 
 function GraphWrapper(props) {
   const rows = [];
-  const forceUpdate = useForceUpdate();
-
   function excludeNodes(node) {
     const n = node.target.textContent;
     if (ecxlNodes.includes(n)) {
@@ -32,11 +31,11 @@ function GraphWrapper(props) {
           text={i.text}
           excl={i.excluded}
           exNode={excludeNodes}
-          upd={forceUpdate}
+          upd={props.upd}
           parents={i.parents.map((x) => x.tytle)}
         />
       )
-      leases.push([i.tytle, i.parents.map((x) => x.tytle)])
+      leashes.push([i.tytle, i.parents.map((x) => x.tytle)])
     }
     const classes = "row justify-content-center rowModule ";
     rows.push(<div className={classes}>{nodes}</div>);
@@ -50,40 +49,71 @@ function GraphWrapper(props) {
   );
 }
 
-function MainCard(props) {
-  const paths = []
+function Leashes(props) {
+  const paths = [];
   const findParentCenter = (titles = ["Приветствие"]) => {
     // console.log(titles)
     const nodes = titles.map((x) => document.getElementById(x));
     const centers = nodes.map((x) => [
       x.offsetLeft + x.offsetWidth / 2,
-      x.offsetTop + x.offsetHeight 
+      x.offsetTop + x.offsetHeight
     ]);
 
     const relativeCenterCords = centers.map((x) => [x[0], x[1]]);
     return relativeCenterCords;
   };
   const findChildCenter = (titles = "Приветствие") => {
-    const node = document.getElementById(titles)
-    const center = [
-      node.offsetLeft + node.offsetWidth / 2,
-      node.offsetTop 
-    ]
+    console.log(titles);
+    const node = document.getElementById(titles);
+    console.log(node);
+    const center = [node.offsetLeft + node.offsetWidth / 2, node.offsetTop];
     return center;
   };
-  for(let pair of leases){
-    console.log("pair 0 ", pair[0])
-    x = findChildCenter(pair[0])
-    const relativeParentCenters = findParentCenter(pair[1]);
-    for (let parentCenter of relativeParentCenters) {
-      paths.push(<path d={ `M ${x} ${y} C ${x} ${y * 0.8}, ${parentCenter[0]} ${
-        parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`}></path>)
+
+  useEffect(()=>{
+    const svgLeash = document.getElementById("svgLeash"); 
+    for (let pair of leashes) {
+      console.log("pair 0 ", pair[0]);
+      let xy = findChildCenter(pair[0]);
+      console.log("xy", xy);
+      const relativeParentCenters = findParentCenter(pair[1]);
+      for (let parentCenter of relativeParentCenters) {
+        let pathLeash = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "path"
+            );
+            pathLeash.classList.add("path_leash");
+            for (let x of relativeParentCenters) {
+              pathLeash.setAttributeNS(
+                null,
+                "d",
+                `M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${parentCenter[0]
+                      } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`
+              );
+              svgLeash.appendChild(pathLeash);
+        // paths.push(
+        //   <path
+        //     d={`M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${
+        //       parentCenter[0]
+        //     } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`}
+        //   ></path>
+        // );
+      }
     }
   }
+
+  props.upd()},[])
+
+  return <svg className="node_leash" id="svgLeash">{paths}</svg>;
+}
+
+function MainCard(props) {
+  const forceUpdate = useForceUpdate();
   return (
     <>
-      <GraphWrapper graph={props.graph} />
-      <svg className="node_leash" id="svgLeash"></svg>
+      <GraphWrapper graph={props.graph} upd={forceUpdate} />
+      <Leashes upd={forceUpdate}  />
+      {/* <svg className="node_leash" id="svgLeash"></svg> */}
     </>
   )
 }
