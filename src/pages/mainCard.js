@@ -13,6 +13,7 @@ function useForceUpdate() {
 function GraphWrapper(props) {
   const rows = [];
   function excludeNodes(node) {
+    console.log(Object.keys(node))
     const n = node.target.textContent;
     if (ecxlNodes.includes(n)) {
       ecxlNodes = ecxlNodes.filter((x) => x !== n);
@@ -50,9 +51,12 @@ function GraphWrapper(props) {
 }
 
 function Leashes(props) {
+  const [dimensions, setDimensions] = React.useState({ 
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
   const paths = [];
   const findParentCenter = (titles = ["Приветствие"]) => {
-    // console.log(titles)
     const nodes = titles.map((x) => document.getElementById(x));
     const centers = nodes.map((x) => [
       x.offsetLeft + x.offsetWidth / 2,
@@ -63,19 +67,28 @@ function Leashes(props) {
     return relativeCenterCords;
   };
   const findChildCenter = (titles = "Приветствие") => {
-    console.log(titles);
     const node = document.getElementById(titles);
-    console.log(node);
     const center = [node.offsetLeft + node.offsetWidth / 2, node.offsetTop];
     return center;
   };
 
+  
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })}
+    window.addEventListener('resize', handleResize)
+    return _ => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
+
   useEffect(()=>{
     const svgLeash = document.getElementById("svgLeash"); 
     for (let pair of leashes) {
-      console.log("pair 0 ", pair[0]);
       let xy = findChildCenter(pair[0]);
-      console.log("xy", xy);
       const relativeParentCenters = findParentCenter(pair[1]);
       for (let parentCenter of relativeParentCenters) {
         let pathLeash = document.createElementNS(
@@ -91,18 +104,10 @@ function Leashes(props) {
                       } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`
               );
               svgLeash.appendChild(pathLeash);
-        // paths.push(
-        //   <path
-        //     d={`M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${
-        //       parentCenter[0]
-        //     } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`}
-        //   ></path>
-        // );
       }
     }
   }
-
-  props.upd()},[])
+  },[])
 
   return <svg className="node_leash" id="svgLeash">{paths}</svg>;
 }
