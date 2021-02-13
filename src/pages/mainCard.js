@@ -3,7 +3,7 @@ import { useEffect } from "react/cjs/react.development";
 import Node from "./nodes/nodes";
 
 let ecxlNodes = ["Приветствие"];
-const leashes = []
+let leashes = [];
 
 function useForceUpdate() {
   const [value, setValue] = useState(0); // integer state
@@ -13,7 +13,7 @@ function useForceUpdate() {
 function GraphWrapper(props) {
   const rows = [];
   function excludeNodes(node) {
-    console.log(Object.keys(node))
+    console.log(Object.keys(node));
     const n = node.target.textContent;
     if (ecxlNodes.includes(n)) {
       ecxlNodes = ecxlNodes.filter((x) => x !== n);
@@ -23,7 +23,7 @@ function GraphWrapper(props) {
   for (let pair of props.graph.represente()) {
     const node = pair[0];
     const nodes = [];
-    
+
     for (let i of node) {
       nodes.push(
         <Node
@@ -35,8 +35,8 @@ function GraphWrapper(props) {
           upd={props.upd}
           parents={i.parents.map((x) => x.tytle)}
         />
-      )
-      leashes.push([i.tytle, i.parents.map((x) => x.tytle)])
+      );
+      leashes.push([i.tytle, i.parents.map((x) => x.tytle)]);
     }
     const classes = "row justify-content-center rowModule ";
     rows.push(<div className={classes}>{nodes}</div>);
@@ -51,18 +51,19 @@ function GraphWrapper(props) {
 }
 
 function Leashes(props) {
-  const [dimensions, setDimensions] = React.useState({ 
+  const [dimensions, setDimensions] = React.useState({
     height: window.innerHeight,
     width: window.innerWidth
-  })
+  });
   const paths = [];
   const findParentCenter = (titles = ["Приветствие"]) => {
-    const nodes = titles.map((x) => document.getElementById(x));
+    let nodes = titles.map((x) => document.getElementById(x));
+    nodes = nodes.filter(x=>x!==null)
+    console.log(nodes)
     const centers = nodes.map((x) => [
       x.offsetLeft + x.offsetWidth / 2,
-      x.offsetTop + x.offsetHeight
+      x.offsetTop + x.offsetHeight-10
     ]);
-
     const relativeCenterCords = centers.map((x) => [x[0], x[1]]);
     return relativeCenterCords;
   };
@@ -72,44 +73,52 @@ function Leashes(props) {
     return center;
   };
 
-  
   useEffect(() => {
     function handleResize() {
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth
-      })}
-    window.addEventListener('resize', handleResize)
-    return _ => {
-      window.removeEventListener('resize', handleResize)
+      });
     }
-  })
+    window.addEventListener("resize", handleResize);
+    return (_) => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
-  useEffect(()=>{
-    const svgLeash = document.getElementById("svgLeash"); 
+  useEffect(() => {
+    const svgLeash = document.getElementById("svgLeash");
+    while (svgLeash.firstChild) {
+      svgLeash.removeChild(svgLeash.firstChild);
+    }
     for (let pair of leashes) {
+
+      console.log("Start", pair)
       let xy = findChildCenter(pair[0]);
       const relativeParentCenters = findParentCenter(pair[1]);
       for (let parentCenter of relativeParentCenters) {
         let pathLeash = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "path"
-            );
-            pathLeash.classList.add("path_leash");
-            for (let x of relativeParentCenters) {
-              pathLeash.setAttributeNS(
-                null,
-                "d",
-                `M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${parentCenter[0]
-                      } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`
-              );
-              svgLeash.appendChild(pathLeash);
+          "http://www.w3.org/2000/svg",
+          "path"
+        );
+        pathLeash.classList.add("path_leash");
+
+        for (let x of relativeParentCenters) {
+          pathLeash.setAttributeNS(
+            null,
+            "d",
+            `M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${
+              parentCenter[0]
+            } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`
+          );
+          svgLeash.appendChild(pathLeash);
+        }
       }
     }
-  }
-  },[])
+    leashes = []
+  });
 
-  return <svg className="node_leash" id="svgLeash">{paths}</svg>;
+  return <svg className="node_leash" id="svgLeash"></svg>;
 }
 
 function MainCard(props) {
@@ -117,10 +126,10 @@ function MainCard(props) {
   return (
     <>
       <GraphWrapper graph={props.graph} upd={forceUpdate} />
-      <Leashes upd={forceUpdate}  />
+      <Leashes upd={forceUpdate} />
       {/* <svg className="node_leash" id="svgLeash"></svg> */}
     </>
-  )
+  );
 }
 
 export { MainCard, useForceUpdate };

@@ -24,9 +24,8 @@ function Node(props) {
   }
 
   const findParentCenter = (titles = ["Приветствие"]) => {
-    // console.log(titles)
-    const nodes = titles.map((x) => document.getElementById(x));
-    console.log(nodes);
+    let nodes = titles.map((x) => document.getElementById(x));
+    nodes = nodes.fill(x=>x!==null)
     const centers = nodes.map((x) => [
       x.offsetLeft + x.offsetWidth / 2,
       x.offsetTop + x.offsetHeight 
@@ -35,29 +34,6 @@ function Node(props) {
     const relativeCenterCords = centers.map((x) => [x[0], x[1]]);
     return relativeCenterCords;
   };
-  // if (thisElRef.current) {
-  //   const svgLeash = document.getElementById("svgLeash");
-  //   const pathLeash = document.createElementNS(
-  //     "http://www.w3.org/2000/svg",
-  //     "path"
-  //   );
-  //   pathLeash.classList.add("path_leash");
-  //   var currentX =
-  //     thisElRef.current.offsetLeft + thisElRef.current.offsetWidth / 2;
-  //   var currentY =
-  //     thisElRef.current.offsetTop;
-  //   const relativeParentCenters = findParentCenter(props.parents);
-  //   for (let x of relativeParentCenters) {
-  //     pathLeash.setAttributeNS(
-  //       null,
-  //       "d",
-  //       `M ${currentX} ${currentY} C ${currentX} ${currentY * 0.8}, ${x[0]} ${
-  //         x[1] / 0.8
-  //       }, ${x[0]} ${x[1]}`
-  //     );
-  //     svgLeash.appendChild(pathLeash);
-  //   }
-  // }
 
   return (
     <div
@@ -68,8 +44,8 @@ function Node(props) {
       onClick={(x) => {
         props.exNode(x);
         props.upd();
-        findParentCenter(props.parents);
-        clearPaths();
+        // findParentCenter(props.parents);
+        // clearPaths();
       }}
       ref={(r) => (thisElRef.current = r)}
     >
