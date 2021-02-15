@@ -1,5 +1,5 @@
 .node {
-  transition: all 0.15s cubic-bezier(0.57, 0.13, 0.53, 0.93);
+  /* transition: all 0.15s cubic-bezier(0.57, 0.13, 0.53, 0.93); */
   padding: 10px 10px;
   margin: 10px;
   border-radius: 5px;
@@ -20,20 +20,20 @@
   /* height: 150px; */
   max-width: 300px;
 
-  background-color: rgba(106, 168, 72, 0.2);
+  background-color: rgb(211, 232, 199);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 .nodeFact {
   height: 75px;
   max-width: 200px;
-  background-color: rgba(221, 209, 115, 0.2);
+  background-color: rgb(243, 239, 197);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nodeАсt {
   color: black; /*rgb(55, 64, 79);*/
 
-  background-color: rgba(224, 50, 2, 0.5);
+  background-color: rgb(245, 166, 146);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -42,7 +42,7 @@
   max-width: 210px;
 
   /* background-color: rgba(144, 238, 144, 0.7); */
-  background-color: rgba(53, 158, 180, 0.2);
+  background-color: rgb(176, 218, 226);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 

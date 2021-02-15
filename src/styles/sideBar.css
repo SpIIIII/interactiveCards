@@ -14,6 +14,7 @@ li {
   background-color: #313a46;
   transition: all 0.1s;
   position: absolute;
+  z-index: 11;
 }
 .sideBarOrdinar {
   height: 100vh;

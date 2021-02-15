@@ -1,0 +1,24 @@
+.node_leash {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 9;
+  }
+  
+  .path_leash {
+    stroke: rgba(79, 79, 79, 0.2);
+    fill: none;
+    z-index: 9;
+  }
+
+  .select_leash{
+      stroke: rgba(204, 75, 15, 0.6);
+      fill: none;
+    }
+
+    .pre_select_leash{
+        stroke: rgba(19, 110, 214, 0.4);
+        fill: none;
+      }
