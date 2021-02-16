@@ -56,15 +56,15 @@ function Leashes(props) {
     width: window.innerWidth
   });
   const paths = [];
-  const findParentCenter = (titles = ["Приветствие"]) => {
-    let nodes = titles.map((x) => document.getElementById(x));
-    nodes = nodes.filter((x) => x !== null);
-    const centers = nodes.map((x) => [
-      x.offsetLeft + x.offsetWidth / 2,
-      x.offsetTop + x.offsetHeight - 10
-    ]);
-    const relativeCenterCords = centers.map((x) => [x[0], x[1]]);
-    return relativeCenterCords;
+  const findParentCenter = (titles = "Приветствие") => {
+    const node = document.getElementById(titles);
+    if (node !== null){
+    const center =  [
+      node.offsetLeft + node.offsetWidth / 2,
+      node.offsetTop + node.offsetHeight - 10
+    ];
+    return center;
+  }
   };
   const findChildCenter = (titles = "Приветствие") => {
     const node = document.getElementById(titles);
@@ -92,35 +92,33 @@ function Leashes(props) {
     }
     for (let pair of props.lsh) {
       let xy = findChildCenter(pair[0]);
-      const relativeParentCenters = findParentCenter(pair[1]);
-      for (let parentCenter of relativeParentCenters) {
+      for (let pai of pair[1]) {
+      const parentCenter = findParentCenter(pai);
         let pathLeash = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "path"
         );
         //color leashes
-        if ([pair[0],...pair[1]].every(x=>ecxlNodes.includes(x))){
+        if (ecxlNodes.includes(pair[0]) && ecxlNodes.includes(pai)){
           pathLeash.classList.add("select_leash")
-        }else if(pair[1].every(x=>ecxlNodes.includes(x))){
-          console.log("start", pair[0])
-          console.log([...pair[1]], ecxlNodes)
+        }else  if( ecxlNodes.includes(pai)){
           pathLeash.classList.add("pre_select_leash");
+        }else{
+        pathLeash.classList.add("path_leash");
         }
-
-          pathLeash.classList.add("path_leash");
         
-
-        //plase leashes
-        for (let x of relativeParentCenters) {
+        //place leashes
+        if(parentCenter!==undefined){
           pathLeash.setAttributeNS(
             null,
             "d",
-            `M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.8}, ${
+            `M ${[xy[0]]} ${xy[1]} C ${xy[0]} ${xy[1] * 0.9}, ${
               parentCenter[0]
-            } ${parentCenter[1] / 0.8}, ${parentCenter[0]} ${parentCenter[1]}`
+            } ${parentCenter[1] / 0.9}, ${parentCenter[0]} ${parentCenter[1]}`
           );
           svgLeash.appendChild(pathLeash);
         }
+        
       }
     }
   });
@@ -129,6 +127,7 @@ function Leashes(props) {
 }
 
 function MainCard(props) {
+  ecxlNodes = props.graph.exclNodes
   const forceUpdate = useForceUpdate();
   return (
     <>

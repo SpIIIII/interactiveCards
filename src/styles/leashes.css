@@ -8,17 +8,16 @@
   }
   
   .path_leash {
-    stroke: rgba(79, 79, 79, 0.2);
-    fill: none;
-    z-index: 9;
+    display: none;
   }
 
   .select_leash{
-      stroke: rgba(204, 75, 15, 0.6);
+    stroke-width: 2;
+      stroke: rgba(189, 76, 23, 0.535);
       fill: none;
     }
 
     .pre_select_leash{
-        stroke: rgba(19, 110, 214, 0.4);
+        stroke: rgba(34, 114, 206, 0.522);
         fill: none;
       }

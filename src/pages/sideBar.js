@@ -44,15 +44,7 @@ function SideBarPunct(props) {
   };
 
   const subPunktClick = () => {
-    props.graph.excludeNodes([
-      "Приветствие",
-      "Нет интернета",
-      "Есть сессия",
-      "Нет сессии",
-      "Проверить индикацию роутера",
-      "IPoE абонент",
-      "TEST"
-    ]);
+    props.graph.excludeNodes( [ "Приветствие", "Нет интернета", "Нет сессии", "Нет линка", "Такиеже проблемы у соседей", "Передать информацию диспеnчеру" ]);
     props.upd();
   };
   
@@ -91,7 +83,7 @@ function SideBarPunct(props) {
           onMouseLeave={makeUnHovered}
           onClick={subPunktClick}
         >
-          Шаблон 1
+          Общаяя проблема
         </li>
       </ul>
     </li>

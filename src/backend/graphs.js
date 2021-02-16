@@ -8,7 +8,7 @@ class Graph {
       "Приветствие",
       "Здравствуйте это компания Feonet, оператор _____ чем могу помочь"
     );
-    this.exclNodes = [];
+    this.exclNodes = ["Приветствие"];
     this.cash = {"Приветствие": this.root}
     this.populating();
   }
