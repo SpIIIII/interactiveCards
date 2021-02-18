@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faBuffer } from "@fortawesome/free-brands-svg-icons";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
 const first = (
   <span className="sideBarPunktIcon">
@@ -17,8 +18,43 @@ const second = (
     <FontAwesomeIcon icon={faBuffer} />
   </span>
 );
+const third = (
+  <span className="sideBarPunktIcon">
+    <FontAwesomeIcon icon={faSlidersH} />
+  </span>
+);
 
-function SideBarPunct(props) {
+function SideBarSubPunct(props) {
+  const makeHovered = (x) => {
+    x.currentTarget.classList.add("barTextPreSelect");
+  };
+  const makeUnHovered = (x) => {
+    x.currentTarget.classList.remove("barTextPreSelect");
+  };
+  const subPunktEffect = () => {
+    props.graph.excludeNodes([
+      "Приветствие",
+      "Нет интернета",
+      "Нет сессии",
+      "Нет линка",
+      "Такиеже проблемы у соседей",
+      "Передать информацию диспеnчеру"
+    ]);
+    props.upd();
+  };
+  return (
+    <li
+      className="sideBarSubPunkt"
+      onMouseEnter={makeHovered}
+      onMouseLeave={makeUnHovered}
+      onClick={subPunktEffect}
+    >
+      {props.name}
+    </li>
+  );
+}
+
+function SideBarList(props) {
   const [selected, togSelect] = useState(false);
   const subPunktsRef = useRef(null);
   const arrowRef = useRef(null);
@@ -43,24 +79,16 @@ function SideBarPunct(props) {
     togSelect(!selected);
   };
 
-  const subPunktClick = () => {
-    props.graph.excludeNodes( [ "Приветствие", "Нет интернета", "Нет сессии", "Нет линка", "Такиеже проблемы у соседей", "Передать информацию диспеnчеру" ]);
-    props.upd();
-  };
-  
-  let sideBarPunktName
-  let sideBarrArrow
+  let sideBarPunktName;
+  let sideBarrArrow;
 
-  if(props.size===1){
-    sideBarPunktName = "smallSideBarPunktName"
-    sideBarrArrow = "sideBarArrow smallSideBarArrow"
-    
-  }else{
-
-    sideBarPunktName = ""
-    sideBarrArrow = "sideBarArrow"
+  if (props.size === 1) {
+    sideBarPunktName = "smallSideBarPunktName";
+    sideBarrArrow = "sideBarArrow smallSideBarArrow";
+  } else {
+    sideBarPunktName = "";
+    sideBarrArrow = "sideBarArrow";
   }
-
 
   return (
     <li className="sideBarPunkts">
@@ -77,14 +105,11 @@ function SideBarPunct(props) {
         </div>
       </div>
       <ul className="sideBarSubPunkts dont_select_text" ref={subPunktsRef}>
-        <li
-          className="sideBarSubPunkt"
-          onMouseEnter={makeHovered}
-          onMouseLeave={makeUnHovered}
-          onClick={subPunktClick}
-        >
-          Общаяя проблема
-        </li>
+        <SideBarSubPunct
+          name={"Общая проблема"}
+          graph={props.graph}
+          upd={props.upd}
+        />
       </ul>
     </li>
   );
@@ -92,7 +117,7 @@ function SideBarPunct(props) {
 
 function SideBar(props) {
   const thisElemRef = useRef();
-  
+
   function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
     useLayoutEffect(() => {
@@ -112,14 +137,14 @@ function SideBar(props) {
     <>
       <div className="fakeBar col-sm-2"></div>
       <ul className={classNmaes} ref={thisElemRef}>
-        <SideBarPunct
+        <SideBarList
           name={"Шаблоны"}
           icon={first}
           graph={props.graph}
           upd={props.upd}
-          size = {barPunctSize}
+          size={barPunctSize}
         />
-        <SideBarPunct
+        <SideBarList
           name={"Другое"}
           icon={second}
           graph={props.graph}
@@ -128,10 +153,15 @@ function SideBar(props) {
           }}
           size={barPunctSize}
         />
-        {/* <SideBarPunct />        
-          <SideBarPunct />        
-          <SideBarPunct />        
-          <SideBarPunct /> */}
+        <SideBarList
+          name={"Настройи"}
+          icon={third}
+          graph={props.graph}
+          upd={() => {
+            console.log("don't do a thing");
+          }}
+          size={barPunctSize}
+        />
       </ul>
     </>
   );
