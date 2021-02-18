@@ -20,20 +20,20 @@
   /* height: 150px; */
   max-width: 300px;
 
-  background-color: rgb(211, 232, 199);
+  background-color: rgb(216, 226, 209);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 .nodeFact {
   height: 75px;
   max-width: 200px;
-  background-color: rgb(243, 239, 197);
+  background-color: rgb(238, 236, 201);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nodeАсt {
   color: black; /*rgb(55, 64, 79);*/
 
-  background-color: rgb(245, 166, 146);
+  background-color: rgba(235, 179, 166, 0.761);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -42,7 +42,7 @@
   max-width: 210px;
 
   /* background-color: rgba(144, 238, 144, 0.7); */
-  background-color: rgb(176, 218, 226);
+  background-color: rgb(192, 217, 223);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 }
 

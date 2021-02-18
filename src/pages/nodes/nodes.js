@@ -16,12 +16,6 @@ function Node(props) {
   let sel = props.excl ? " nodeSelected" : " ";
   let classes = "col-md-auto node " + cl[props.type - 1] + sel;
 
-  const clearPaths = ()=>{
-    const svgLeash = document.getElementById("svgLeash");
-    while (svgLeash.firstChild){
-      svgLeash.removeChild(svgLeash.firstChild)
-    } 
-  }
 
   const findParentCenter = (titles = ["Приветствие"]) => {
     let nodes = titles.map((x) => document.getElementById(x));
@@ -44,14 +38,11 @@ function Node(props) {
       onClick={(x) => {
         props.exNode(x);
         props.upd();
-        // findParentCenter(props.parents);
-        // clearPaths();
       }}
       ref={(r) => (thisElRef.current = r)}
     >
       <span className=" header_style node_header_color">{props.title}</span>
       <div className="node_text_color text_style">{props.text}</div>
-      <svg calssName="node_leash">{pathes}</svg>
     </div>
   );
 }
