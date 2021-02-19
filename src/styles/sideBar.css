@@ -83,3 +83,9 @@ li {
 .smallSideBarPunktName{
   display: none;
 }
+
+.sideBarRedo{
+  margin: 0px 0px 23px 12px;
+  text-align: left;
+  cursor: pointer;
+}

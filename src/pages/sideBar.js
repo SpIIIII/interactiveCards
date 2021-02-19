@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faBuffer } from "@fortawesome/free-brands-svg-icons";
-import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
+import { faSlidersH, faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 
 const first = (
   <span className="sideBarPunktIcon">
@@ -23,6 +23,11 @@ const third = (
     <FontAwesomeIcon icon={faSlidersH} />
   </span>
 );
+const redo = (
+  <span className="sideBarPunktIcon">
+    <FontAwesomeIcon icon={faRedoAlt} />
+  </span>
+)
 
 function SideBarSubPunct(props) {
   const makeHovered = (x) => {
@@ -32,15 +37,7 @@ function SideBarSubPunct(props) {
     x.currentTarget.classList.remove("barTextPreSelect");
   };
   const subPunktEffect = () => {
-    props.graph.excludeNodes([
-      "Приветствие",
-      "Нет интернета",
-      "Нет сессии",
-      "Нет линка",
-      "Такиеже проблемы у соседей",
-      "Передать информацию диспеnчеру"
-    ]);
-    props.upd();
+    props.effect();
   };
   return (
     <li
@@ -54,7 +51,7 @@ function SideBarSubPunct(props) {
   );
 }
 
-function SideBarList(props) {
+function SideBarPunkt(props) {
   const [selected, togSelect] = useState(false);
   const subPunktsRef = useRef(null);
   const arrowRef = useRef(null);
@@ -89,6 +86,12 @@ function SideBarList(props) {
     sideBarPunktName = "";
     sideBarrArrow = "sideBarArrow";
   }
+  const subPunktsDone = [];
+  for (let punkt in props.sub) {
+    subPunktsDone.push(
+      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
+    );
+  }
 
   return (
     <li className="sideBarPunkts">
@@ -105,11 +108,7 @@ function SideBarList(props) {
         </div>
       </div>
       <ul className="sideBarSubPunkts dont_select_text" ref={subPunktsRef}>
-        <SideBarSubPunct
-          name={"Общая проблема"}
-          graph={props.graph}
-          upd={props.upd}
-        />
+        {subPunktsDone}
       </ul>
     </li>
   );
@@ -133,35 +132,57 @@ function SideBar(props) {
   const barSize = useWindowSize()[0] > 880 ? "sideBarOrdinar" : "sideBarSmall";
   const barPunctSize = useWindowSize()[0] > 880 ? 0 : 1;
   const classNmaes = " barText header_style sideBarFixed sideBar " + barSize;
+
+  const punktsList = {
+    Шаблоны: {
+      icon: first,
+      sub: {
+        "Общая проблема": () => {
+          props.graph.excludeNodes([
+            "Приветствие",
+            "Нет интернета",
+            "Нет сессии",
+            "Нет линка",
+            "Такиеже проблемы у соседей",
+            "Передать информацию диспеnчеру"
+          ]);
+          props.upd();
+        }
+      }
+    },
+    Настройки: {
+      icon: third,
+      sub: {
+        "plase holder": () => {
+          console.log("don't do a thing");
+        }
+      }
+    }
+  };
+
+  const punktsListDone = [];
+  // useEffect(() => {
+  for (let punkt in punktsList) {
+    punktsListDone.push(
+      <SideBarPunkt
+        name={punkt}
+        icon={punktsList[punkt].icon}
+        size={barPunctSize}
+        sub={punktsList[punkt].sub}
+      />
+    );
+  }
+  // },[]);
+  const clear = ()=>{
+    props.graph.excludeNodes(["Приветствие"])
+    props.upd()
+  }
   return (
     <>
       <div className="fakeBar col-sm-2"></div>
-      <ul className={classNmaes} ref={thisElemRef}>
-        <SideBarList
-          name={"Шаблоны"}
-          icon={first}
-          graph={props.graph}
-          upd={props.upd}
-          size={barPunctSize}
-        />
-        <SideBarList
-          name={"Другое"}
-          icon={second}
-          graph={props.graph}
-          upd={() => {
-            console.log("don't do a thing");
-          }}
-          size={barPunctSize}
-        />
-        <SideBarList
-          name={"Настройи"}
-          icon={third}
-          graph={props.graph}
-          upd={() => {
-            console.log("don't do a thing");
-          }}
-          size={barPunctSize}
-        />
+      <ul className={classNmaes} ref={thisElemRef} id={"sideList"}>
+        <div className={"sideBarRedo"} onClick={clear}>{redo}</div>
+        {punktsListDone}
       </ul>
     </>
   );
