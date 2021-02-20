@@ -55,6 +55,9 @@ function SideBarPunkt(props) {
   const [selected, togSelect] = useState(false);
   const subPunktsRef = useRef(null);
   const arrowRef = useRef(null);
+  let sideBarPunktName;
+  let sideBarrArrow;
+  const subPunktsDone = [];
 
   const makeHovered = (x) => {
     x.currentTarget.classList.add("barTextPreSelect");
@@ -76,22 +79,22 @@ function SideBarPunkt(props) {
     togSelect(!selected);
   };
 
-  let sideBarPunktName;
-  let sideBarrArrow;
 
-  if (props.size === 1) {
-    sideBarPunktName = "smallSideBarPunktName";
-    sideBarrArrow = "sideBarArrow smallSideBarArrow";
-  } else {
-    sideBarPunktName = "";
-    sideBarrArrow = "sideBarArrow";
-  }
-  const subPunktsDone = [];
-  for (let punkt in props.sub) {
-    subPunktsDone.push(
-      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
-    );
-  }
+  
+    if (props.size === 1) {
+      sideBarPunktName = "smallSideBarPunktName";
+      sideBarrArrow = "sideBarArrow smallSideBarArrow";
+    } else {
+      sideBarPunktName = "";
+      sideBarrArrow = "sideBarArrow";
+    }
+    
+    for (let punkt in props.sub) {
+      subPunktsDone.push(
+        <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
+      );
+    }
+
 
   return (
     <li className="sideBarPunkts">
@@ -177,11 +180,18 @@ function SideBar(props) {
     props.graph.excludeNodes(["Приветствие"])
     props.upd()
   }
+  const makeHovered = (x) => {
+    x.currentTarget.classList.add("barTextPreSelect");
+  };
+  const makeUnHovered = (x) => {
+    x.currentTarget.classList.remove("barTextPreSelect");
+  };
   return (
     <>
       <div className="fakeBar col-sm-2"></div>
       <ul className={classNmaes} ref={thisElemRef} id={"sideList"}>
-        <div className={"sideBarRedo"} onClick={clear}>{redo}</div>
+        <div className={"sideBarRedo"}         onMouseEnter={makeHovered}
+        onMouseLeave={makeUnHovered} onClick={clear}>{redo}</div>
         {punktsListDone}
       </ul>
     </>

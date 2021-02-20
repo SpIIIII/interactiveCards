@@ -54,7 +54,7 @@ li {
   width: 100px;
 }
 .sideBarArrow {
-  transform: translateY(4px);
+  transform: translateY(3px);
   float: right;
   transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
 }
@@ -62,7 +62,7 @@ li {
   transform: rotate(90deg);
 }
 .FAArrow {
-  scale: 0.7;
+  scale: 0.8;
   transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
 }
 .barText {
@@ -88,4 +88,5 @@ li {
   margin: 0px 0px 23px 12px;
   text-align: left;
   cursor: pointer;
+  transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
 }
