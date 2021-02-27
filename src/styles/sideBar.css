@@ -77,16 +77,26 @@ li {
   color: #fbfbfb;
 }
 
-.smallSideBarArrow{
+.smallSideBarArrow {
   display: none;
 }
-.smallSideBarPunktName{
+.smallSideBarPunktName {
   display: none;
 }
 
-.sideBarRedo{
+.sideBarRedo {
   margin: 0px 0px 23px 12px;
   text-align: left;
   cursor: pointer;
   transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
+}
+
+.macVenderInput {
+  height: 30px;
+  background-color: #272f38;
+  border: none;
+  border-radius: 5px;
+  color: #738aa4;
+  user-select: none;
+  outline: none;
 }

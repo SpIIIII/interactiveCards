@@ -27,7 +27,7 @@ const redo = (
   <span className="sideBarPunktIcon">
     <FontAwesomeIcon icon={faRedoAlt} />
   </span>
-)
+);
 
 function SideBarSubPunct(props) {
   const makeHovered = (x) => {
@@ -79,22 +79,19 @@ function SideBarPunkt(props) {
     togSelect(!selected);
   };
 
+  if (props.size === 1) {
+    sideBarPunktName = "smallSideBarPunktName";
+    sideBarrArrow = "sideBarArrow smallSideBarArrow";
+  } else {
+    sideBarPunktName = "";
+    sideBarrArrow = "sideBarArrow";
+  }
 
-  
-    if (props.size === 1) {
-      sideBarPunktName = "smallSideBarPunktName";
-      sideBarrArrow = "sideBarArrow smallSideBarArrow";
-    } else {
-      sideBarPunktName = "";
-      sideBarrArrow = "sideBarArrow";
-    }
-    
-    for (let punkt in props.sub) {
-      subPunktsDone.push(
-        <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
-      );
-    }
-
+  for (let punkt in props.sub) {
+    subPunktsDone.push(
+      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
+    );
+  }
 
   return (
     <li className="sideBarPunkts">
@@ -114,6 +111,33 @@ function SideBarPunkt(props) {
         {subPunktsDone}
       </ul>
     </li>
+  );
+}
+
+function MACVendor(props) {
+  useEffect(() => {
+    const Http = new XMLHttpRequest();
+    const url = "https://api.macvendors.com/FC:FB:FB:01:FA:21";
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = (e) => {
+      console.log(Http.responseType);
+    };
+  }, []);
+  const test = () => {
+    console.log(test);
+  };
+
+  return (
+    <>
+      <input
+        className="macVenderInput"
+        type="text"
+        placeholder="test"
+        maxlength="17"
+      />
+    </>
   );
 }
 
@@ -176,10 +200,10 @@ function SideBar(props) {
     );
   }
   // },[]);
-  const clear = ()=>{
-    props.graph.excludeNodes(["Приветствие"])
-    props.upd()
-  }
+  const clear = () => {
+    props.graph.excludeNodes(["Приветствие"]);
+    props.upd();
+  };
   const makeHovered = (x) => {
     x.currentTarget.classList.add("barTextPreSelect");
   };
@@ -190,10 +214,18 @@ function SideBar(props) {
     <>
       <div className="fakeBar col-sm-2"></div>
       <ul className={classNmaes} ref={thisElemRef} id={"sideList"}>
-        <div className={"sideBarRedo"}         onMouseEnter={makeHovered}
-        onMouseLeave={makeUnHovered} onClick={clear}>{redo}</div>
+        <div
+          className={"sideBarRedo"}
+          onMouseEnter={makeHovered}
+          onMouseLeave={makeUnHovered}
+          onClick={clear}
+        >
+          {redo}
+        </div>
         {punktsListDone}
+        <MACVendor />
       </ul>
+      {/* <div>test</div> */}
     </>
   );
 }
