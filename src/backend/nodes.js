@@ -118,21 +118,45 @@ const factNodes = {
     type: 2
   },
   "IPoE абонент": {
-    child: [],
+    child: ["Такиеже проблемы у соседей"],
     text: "",
     type: 2
   },
   "PPPoE абонент": {
-    child: [],
+    child: ["Такиеже проблемы у соседей", "Настройки роутера"],
     text: "",
     type: 2
   },
   "Подключен оптикой": {
-    child: [],
+    child: ["Такиеже проблемы у соседей"],
     text: "",
     type: 2
   },
   "GPON абонент": {
+    child: [
+      "Такиеже проблемы у соседей",
+      "Горит PON Alarm",
+      "Не горят Speed и Link Act"
+    ],
+    text: "",
+    type: 2
+  },
+  "Настройки роутера": {
+    child: [],
+    text: "",
+    type: 2
+  },
+  "Горит PON Alarm": {
+    child: [],
+    text: "",
+    type: 2
+  },
+  "Не горят Speed и Link Act": {
+    child: ["Подключить напрямую"],
+    text: "",
+    type: 2
+  },
+  "Подключить напрямую": {
     child: [],
     text: "",
     type: 2

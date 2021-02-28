@@ -115,15 +115,20 @@ function SideBarPunkt(props) {
 }
 
 function MACVendor(props) {
+  function httpGetAsync(theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    };
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
   useEffect(() => {
     const Http = new XMLHttpRequest();
-    const url = "https://api.macvendors.com/FC:FB:FB:01:FA:21";
-    Http.open("GET", url);
-    Http.send();
-
-    Http.onreadystatechange = (e) => {
-      console.log(Http.responseType);
-    };
+    const url = "http://api.macvendors.com/FC:FB:FB:01:FA:21";
+    httpGetAsync(url, console.log);
   }, []);
   const test = () => {
     console.log(test);
