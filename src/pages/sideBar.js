@@ -123,6 +123,8 @@ function MACVendor(props) {
         callback(xmlHttp.responseText);
     };
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    // xmlHttp.setRequestHeader("x-filename", photoId);
+
     xmlHttp.send(null);
   }
   useEffect(() => {

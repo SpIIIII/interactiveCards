@@ -11,6 +11,9 @@ function useForceUpdate() {
 }
 
 function GraphWrapper(props) {
+  let mult = 1;
+  let opas = "1"
+  const smalence = [0, 0.5]
   const rows = [];
   function excludeNodes(node) {
     const n = node.target.textContent;
@@ -22,8 +25,11 @@ function GraphWrapper(props) {
   for (let pair of props.graph.represente()) {
     const node = pair[0];
     const nodes = [];
-
+    let count_appear = 0
     for (let i of node) {
+      if(ecxlNodes.includes(i.tytle)){
+        count_appear+=1
+      }
       nodes.push(
         <Node
           title={i.tytle}
@@ -37,8 +43,16 @@ function GraphWrapper(props) {
       );
       leashes.push([i.tytle, i.parents.map((x) => x.tytle)]);
     }
+    
     const classes = "row justify-content-center rowModule ";
-    rows.push(<div className={classes}>{nodes}</div>);
+    
+    rows.push(<div className={classes} style={{"opacity":opas}} >{nodes}</div>);
+    if(count_appear>0){
+      opas = "1"
+    }else{
+      mult /= 2.5
+      opas = `${(1*mult)}`
+    }
   }
   leashes = [];
   return (
