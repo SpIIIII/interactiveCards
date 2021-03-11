@@ -1,5 +1,5 @@
 .node {
-  /* transition: all 0.15s cubic-bezier(0.57, 0.13, 0.53, 0.93); */
+  transition: all 0.15s cubic-bezier(0.57, 0.13, 0.53, 0.93);
   padding: 10px 10px;
   margin: 10px;
   border-radius: 5px;

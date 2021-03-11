@@ -45,7 +45,9 @@ function GraphWrapper(props) {
     }
     
     const classes = "row justify-content-center rowModule ";
-    
+    if(count_appear>0){
+      opas = "1"
+    }
     rows.push(<div className={classes} style={{"opacity":opas}} >{nodes}</div>);
     if(count_appear>0){
       opas = "1"
