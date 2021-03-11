@@ -86,7 +86,7 @@ function Leashes(props) {
     const node = document.getElementById(titles);
     const center = [
       node.offsetLeft + node.offsetWidth / 2 - 10,
-      node.offsetTop + 5
+      node.offsetTop + 1
     ];
     return center;
   };
