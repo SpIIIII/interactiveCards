@@ -6,6 +6,7 @@ let ecxlNodes = ["Приветствие"];
 let leashes = [];
 
 function useForceUpdate() {
+  console.log("updated")
   const [value, setValue] = useState(0); // integer state
   return () => setValue((value) => ++value); // update the state to force render
 }

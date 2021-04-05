@@ -3,6 +3,7 @@
 @import "styles/mainCard.css";
 @import "styles/sideBar.css";
 @import "styles/leashes.css";
+@import "styles/popover.css";
 
 * {
   margin: 0;

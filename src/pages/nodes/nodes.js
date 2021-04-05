@@ -29,9 +29,24 @@ function Node(props) {
     const relativeCenterCords = centers.map((x) => [x[0], x[1]]);
     return relativeCenterCords;
   };
-
-  const extraOpen = () => {
-    console.log("extra test");
+  const extraList = [];
+  const extraOpen = (x) => {
+    const parent = document.getElementById("mainC");
+    const popover = document.createElement("div");
+    popover.classList.add("popover");
+    popover.style.top = `${(x.clientY + window.pageYOffset) -5}px`;
+    popover.style.left = `${x.clientX-5}px`;
+    popover.onmouseout = function(event) {
+      extraClose()   
+    }
+    parent.append(popover);
+    extraList.push(popover);
+  };
+  const extraClose = (x) => {
+    for (let element of extraList) {
+      element.remove();
+    }
+    extraList.length = 0;
   };
 
   return (
@@ -47,10 +62,9 @@ function Node(props) {
       ref={(r) => (thisElRef.current = r)}
     >
       <div className="header_style node_header_color">{props.title}</div>
-      <div className="extra" onMouseEnter={extraOpen}>
+      <div className="extra" onClick={extraOpen} onMouseLeave={extraClose}>
         <FontAwesomeIcon className="FAextra" icon={faEllipsisV} />
       </div>
-
 
       {/* <div className="node_text_color text_style">{props.text}</div> */}
     </div>
