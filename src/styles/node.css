@@ -78,6 +78,7 @@
 }
 
 .extra {
+  height: 25px;
   color: rgba(0, 0, 0, 0.2);
   padding: 0px 3px 0px 7px;
   /* display: inline; */

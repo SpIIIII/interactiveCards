@@ -34,9 +34,13 @@ function Node(props) {
     const parent = document.getElementById("mainC");
     const popover = document.createElement("div");
     popover.classList.add("popover");
-    popover.style.top = `${(x.clientY + window.pageYOffset) -5}px`;
+    popover.appendChild(document.createTextNode(props.text))
+    popover.style.top = `${(x.clientY + window.pageYOffset) -45}px`;
     popover.style.left = `${x.clientX-5}px`;
     popover.onmouseout = function(event) {
+      extraClose()   
+    }
+    popover.onclick = function(event) {
       extraClose()   
     }
     parent.append(popover);

@@ -1,7 +1,9 @@
 .popover {
     position: absolute;
-    height: 50px;
-    width: 100px;
+    min-height: 50px;
+    max-height: 100px;
+    min-width: 50px;
+    max-width: 500px;
     background-color: white;
     transition: all 3s;
   }

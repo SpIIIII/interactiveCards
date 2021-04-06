@@ -147,6 +147,7 @@ function Leashes(props) {
 
 function MainCard(props) {
   ecxlNodes = props.graph.exclNodes;
+  // console.log(props.graph.exclNodes)
   const forceUpdate = useForceUpdate();
   return (
     <>
