@@ -6,7 +6,7 @@ class Graph {
     this.depth = 0;
     this.root = new Node(
       "Приветствие",
-      "Здравствуйте это компания Feonet, оператор _____ чем могу помочь"
+      'Сначала представьтесь и поприветствуйте абонента "Здравствуйте это компания Feonet, оператор _____ чем могу помочь"'
     );
     this.exclNodes = ["Приветствие"];
     this.cash = {"Приветствие": this.root}
@@ -30,7 +30,8 @@ class Graph {
   addChilds(parentNode) {
     let tempChilds = this.nodes[parentNode.tytle].child;
     parentNode.type = this.nodes[parentNode.tytle].type;
-    parentNode.multiParetn = this.nodes[parentNode.tytle].multiP
+    parentNode.text = this.nodes[parentNode.tytle].text
+    parentNode.neseccParent = this.nodes[parentNode.tytle].neseccParent
     for (let child of tempChilds) {
         parentNode.addChild(this.nodefy(child, parentNode));
     }
@@ -38,7 +39,6 @@ class Graph {
 
   populating() {
     this.addChilds(this.root);
-    // return this.root;
   }
 
   findNodeByTytle(tytle, startNode){
@@ -85,7 +85,6 @@ class Graph {
   }
 
   getFloor(parents=[]) { 
-      
       let childs = [];
       let tempChilds = []
       for (let nod of parents) {

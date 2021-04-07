@@ -33,7 +33,7 @@
 .nodeАсt {
   color: black; /*rgb(55, 64, 79);*/
 
-  background-color: rgba(235, 179, 166, 0.761);
+  background-color: rgb(235, 179, 166);
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 

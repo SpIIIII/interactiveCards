@@ -31,20 +31,22 @@ function Node(props) {
   };
   const extraList = [];
   const extraOpen = (x) => {
-    const parent = document.getElementById("mainC");
-    const popover = document.createElement("div");
-    popover.classList.add("popover");
-    popover.appendChild(document.createTextNode(props.text))
-    popover.style.top = `${(x.clientY + window.pageYOffset) -45}px`;
-    popover.style.left = `${x.clientX-5}px`;
-    popover.onmouseout = function(event) {
-      extraClose()   
+    if(props.text){   
+      const parent = document.getElementById("mainC");
+      const popover = document.createElement("div");
+      popover.classList.add("popover");
+      popover.appendChild(document.createTextNode(props.text))
+      popover.style.top = `${(x.clientY + window.pageYOffset) -45}px`;
+      popover.style.left = `${x.clientX-5}px`;
+      popover.onmouseout = function(event) {
+        extraClose()   
+      }
+      popover.onclick = function(event) {
+        extraClose()   
+      }
+      parent.append(popover);
+      extraList.push(popover);
     }
-    popover.onclick = function(event) {
-      extraClose()   
-    }
-    parent.append(popover);
-    extraList.push(popover);
   };
   const extraClose = (x) => {
     for (let element of extraList) {

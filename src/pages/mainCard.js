@@ -50,12 +50,15 @@ function GraphWrapper(props) {
       opas = "1"
     }
     rows.push(<div className={classes} style={{"opacity":opas}} >{nodes}</div>);
-    if(count_appear>0){
-      opas = "1"
-    }else{
-      mult /= 2.5
-      opas = `${(1*mult)}`
+    if(props.set.hideBranches){
+      if(count_appear>0){
+        opas = "1"
+      }else{
+        mult /= 2.5
+        opas = `${(1*mult)}`
+      }
     }
+
   }
   leashes = [];
   return (
@@ -152,7 +155,7 @@ function MainCard(props) {
   return (
     <>
       <Leashes lsh={leashes} />
-      <GraphWrapper graph={props.graph} upd={forceUpdate} />
+      <GraphWrapper graph={props.graph} upd={forceUpdate} set={props.set}/>
       {/* <svg className="node_leash" id="svgLeash"></svg> */}
     </>
   );
