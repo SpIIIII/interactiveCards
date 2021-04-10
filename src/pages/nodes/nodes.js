@@ -31,6 +31,7 @@ function Node(props) {
   };
   const extraList = [];
   const extraOpen = (x) => {
+    console.log("popped")
     if(props.text){   
       const parent = document.getElementById("mainC");
       const popover = document.createElement("div");
@@ -43,6 +44,9 @@ function Node(props) {
       }
       popover.onclick = function(event) {
         extraClose()   
+      }
+      popover.onmouseenter = function(event) {
+        popover.style.opacity = "1"
       }
       parent.append(popover);
       extraList.push(popover);

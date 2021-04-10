@@ -39,6 +39,10 @@ function SideBarSubPunct(props) {
   const subPunktEffect = () => {
     props.effect();
   };
+  let checkBox = <></>
+  if(props.check){
+    checkBox =  <input className="sideBarCheck" type="checkbox"></input>
+  }
   return (
     <li
       className="sideBarSubPunkt"
@@ -46,6 +50,7 @@ function SideBarSubPunct(props) {
       onMouseLeave={makeUnHovered}
       onClick={subPunktEffect}
     >
+      {checkBox}
       {props.name}
     </li>
   );
@@ -55,9 +60,11 @@ function SideBarPunkt(props) {
   const [selected, togSelect] = useState(false);
   const subPunktsRef = useRef(null);
   const arrowRef = useRef(null);
+  const subPunktsDone = [];
   let sideBarPunktName;
   let sideBarrArrow;
-  const subPunktsDone = [];
+
+  
 
   const makeHovered = (x) => {
     x.currentTarget.classList.add("barTextPreSelect");
@@ -89,7 +96,7 @@ function SideBarPunkt(props) {
 
   for (let punkt in props.sub) {
     subPunktsDone.push(
-      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} />
+      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} check={props.check}/>
     );
   }
 
@@ -179,15 +186,19 @@ function SideBar(props) {
           props.graph.excludeNodes([ "Приветствие", "Интернет", "Нет интернета", "Есть сессия", "Перезагрузка и обновление" ]);
           props.upd();
         }
-      }
+      },
+      check: false
     },
     Настройки: {
       icon: third,
       sub: {
-        "plase holder": () => {
-          console.log("don't do a thing");
+        "Прозрачночть": () => {
+          props.set.hideBranches = false;
+          props.upd();
+          return props.set.hideBranches
         }
-      }
+      },
+      check: true
     }
   };
 
@@ -200,6 +211,7 @@ function SideBar(props) {
         icon={punktsList[punkt].icon}
         size={barPunctSize}
         sub={punktsList[punkt].sub}
+        check={punktsList[punkt].check}
       />
     );
   }

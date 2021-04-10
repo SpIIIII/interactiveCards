@@ -100,3 +100,8 @@ li {
   user-select: none;
   outline: none;
 }
+
+.sideBarCheck{
+  position: absolute;
+  transform: translateX(-25px) translateY(4px);
+}

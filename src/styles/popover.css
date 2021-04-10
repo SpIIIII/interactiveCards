@@ -6,6 +6,8 @@
     max-width: 500px;
     background-color: white;
     transition: all 3s;
+    transition: opacity 0.5s;
     padding: 10px 5px 10px 25px; 
+    opacity: 0;
   }
   
