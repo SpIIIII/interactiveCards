@@ -30,6 +30,7 @@ const redo = (
 );
 
 function SideBarSubPunct(props) {
+  const checkRef = useRef();
   const makeHovered = (x) => {
     x.currentTarget.classList.add("barTextPreSelect");
   };
@@ -39,16 +40,25 @@ function SideBarSubPunct(props) {
   const subPunktEffect = () => {
     props.effect();
   };
-  let checkBox = <></>
-  if(props.check){
-    checkBox =  <input className="sideBarCheck" type="checkbox"></input>
+  let checkBox = <></>;
+  if (props.check) {
+    checkBox = (
+      <input className="sideBarCheck" type="checkbox" ref={checkRef}></input>
+    );
   }
+  const subPunktEffectHendler = () => {
+    subPunktEffect();
+    console.log(checkRef.current.checked);
+    checkRef.current.checked = !checkRef.current.checked;
+    console.log(checkRef.current.checked);
+  };
+
   return (
     <li
       className="sideBarSubPunkt"
       onMouseEnter={makeHovered}
       onMouseLeave={makeUnHovered}
-      onClick={subPunktEffect}
+      onClick={subPunktEffectHendler}
     >
       {checkBox}
       {props.name}
@@ -63,8 +73,6 @@ function SideBarPunkt(props) {
   const subPunktsDone = [];
   let sideBarPunktName;
   let sideBarrArrow;
-
-  
 
   const makeHovered = (x) => {
     x.currentTarget.classList.add("barTextPreSelect");
@@ -96,7 +104,11 @@ function SideBarPunkt(props) {
 
   for (let punkt in props.sub) {
     subPunktsDone.push(
-      <SideBarSubPunct name={punkt} effect={props.sub[punkt]} check={props.check}/>
+      <SideBarSubPunct
+        name={punkt}
+        effect={props.sub[punkt]}
+        check={props.check}
+      />
     );
   }
 
@@ -179,11 +191,26 @@ function SideBar(props) {
       icon: first,
       sub: {
         "Общая проблема": () => {
-          props.graph.excludeNodes([ "Приветствие", "Интернет", "Нет интернета", "Нет сессии", "IPoE абонент", "PPPoE абонент", "Такиеже проблемы у соседей", "Передать информацию диспеnчеру" ]);
+          props.graph.excludeNodes([
+            "Приветствие",
+            "Интернет",
+            "Нет интернета",
+            "Нет сессии",
+            "IPoE абонент",
+            "PPPoE абонент",
+            "Такиеже проблемы у соседей",
+            "Передать информацию диспеnчеру"
+          ]);
           props.upd();
         },
-        "Зависло соединение":() =>{
-          props.graph.excludeNodes([ "Приветствие", "Интернет", "Нет интернета", "Есть сессия", "Перезагрузка и обновление" ]);
+        "Зависло соединение": () => {
+          props.graph.excludeNodes([
+            "Приветствие",
+            "Интернет",
+            "Нет интернета",
+            "Есть сессия",
+            "Перезагрузка и обновление"
+          ]);
           props.upd();
         }
       },
@@ -192,10 +219,10 @@ function SideBar(props) {
     Настройки: {
       icon: third,
       sub: {
-        "Прозрачночть": () => {
-          props.set.hideBranches = false;
+        Прозрачночть: () => {
+          props.set.hideBranches = !props.set.hideBranches;
           props.upd();
-          return props.set.hideBranches
+          return props.set.hideBranches;
         }
       },
       check: true
