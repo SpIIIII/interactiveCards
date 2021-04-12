@@ -6,15 +6,14 @@ let ecxlNodes = ["Приветствие"];
 let leashes = [];
 
 function useForceUpdate() {
-  console.log("updated")
+  console.log("updated");
   const [value, setValue] = useState(0); // integer state
   return () => setValue((value) => ++value); // update the state to force render
 }
 
 function GraphWrapper(props) {
   let mult = 1;
-  let opas = "1"
-  const smalence = [0, 0.5]
+  let opas = "1";
   const rows = [];
   function excludeNodes(node) {
     const n = node.target.textContent;
@@ -22,14 +21,18 @@ function GraphWrapper(props) {
       ecxlNodes = ecxlNodes.filter((x) => x !== n);
     } else ecxlNodes.push(n);
     props.graph.excludeNodes(ecxlNodes);
+    if(props.set.spanBranches) props.graph.spanExclNodes()
+    ecxlNodes = props.graph.exclNodes
+
   }
+  // ecxlNodes = props.graph.exclNodes;
   for (let pair of props.graph.represente()) {
     const node = pair[0];
     const nodes = [];
-    let count_appear = 0
+    let count_appear = 0;
     for (let i of node) {
-      if(ecxlNodes.includes(i.tytle)){
-        count_appear+=1
+      if (ecxlNodes.includes(i.tytle)) {
+        count_appear += 1;
       }
       nodes.push(
         <Node
@@ -44,21 +47,24 @@ function GraphWrapper(props) {
       );
       leashes.push([i.tytle, i.parents.map((x) => x.tytle)]);
     }
-    
+
     const classes = "row justify-content-center rowModule ";
-    if(count_appear>0){
-      opas = "1"
+    if (count_appear > 0) {
+      opas = "1";
     }
-    rows.push(<div className={classes} style={{"opacity":opas}} >{nodes}</div>);
-    if(props.set.hideBranches){
-      if(count_appear>0){
-        opas = "1"
-      }else{
-        mult /= 2.5
-        opas = `${(1*mult)}`
+    rows.push(
+      <div className={classes} style={{ opacity: opas }}>
+        {nodes}
+      </div>
+    );
+    if (props.set.hideBranches) {
+      if (count_appear > 0) {
+        opas = "1";
+      } else {
+        mult /= 2.5;
+        opas = `${1 * mult}`;
       }
     }
-
   }
   leashes = [];
   return (
@@ -149,13 +155,12 @@ function Leashes(props) {
 }
 
 function MainCard(props) {
-  ecxlNodes = props.graph.exclNodes;
-  // console.log(props.graph.exclNodes)
+  ecxlNodes = props.graph.exclNodes
   const forceUpdate = useForceUpdate();
   return (
     <>
       <Leashes lsh={leashes} />
-      <GraphWrapper graph={props.graph} upd={forceUpdate} set={props.set}/>
+      <GraphWrapper graph={props.graph} upd={forceUpdate} set={props.set} />
       {/* <svg className="node_leash" id="svgLeash"></svg> */}
     </>
   );

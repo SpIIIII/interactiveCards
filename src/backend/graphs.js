@@ -9,31 +9,31 @@ class Graph {
       'Сначала представьтесь и поприветствуйте абонента "Здравствуйте это компания Feonet, оператор _____ чем могу помочь"'
     );
     this.exclNodes = ["Приветствие"];
-    this.cash = {"Приветствие": this.root}
+    this.cash = { Приветствие: this.root };
     this.populating();
   }
 
   nodefy(node, parentNode) {
-    let newNode
-    if(this.findNodeByTytle(node, parentNode)!==undefined){
-      newNode = this.findNodeByTytle(node, parentNode)      
-    }else{
+    let newNode;
+    if (this.findNodeByTytle(node, parentNode) !== undefined) {
+      newNode = this.findNodeByTytle(node, parentNode);
+    } else {
       newNode = new Node(node);
       this.addChilds(newNode);
-      this.cash[node] = newNode
+      this.cash[node] = newNode;
     }
-    
-    newNode.addParent(parentNode)
-    return newNode
+
+    newNode.addParent(parentNode);
+    return newNode;
   }
 
   addChilds(parentNode) {
     let tempChilds = this.nodes[parentNode.tytle].child;
     parentNode.type = this.nodes[parentNode.tytle].type;
-    parentNode.text = this.nodes[parentNode.tytle].text
-    parentNode.neseccParent = this.nodes[parentNode.tytle].neseccParent
+    parentNode.text = this.nodes[parentNode.tytle].text;
+    parentNode.neseccParent = this.nodes[parentNode.tytle].neseccParent;
     for (let child of tempChilds) {
-        parentNode.addChild(this.nodefy(child, parentNode));
+      parentNode.addChild(this.nodefy(child, parentNode));
     }
   }
 
@@ -41,34 +41,33 @@ class Graph {
     this.addChilds(this.root);
   }
 
-  findNodeByTytle(tytle, startNode){
-    if (Object.keys(this.cash).includes(tytle)) return this.cash[tytle]
-    let parent = startNode
-    for (let child of parent.childs){
-      if(child.tytle === tytle) {
-        return child
-      } 
-      if (child.childs.length>0) return this.findNodeByTytle(tytle, child)
-      else continue
-    }    
-  }
-
-  resetNodesAd(){
-    for (let node of Object.values(this.cash)){
-      node.added = false
+  findNodeByTytle(tytle, startNode) {
+    if (Object.keys(this.cash).includes(tytle)) return this.cash[tytle];
+    let parent = startNode;
+    for (let child of parent.childs) {
+      if (child.tytle === tytle) {
+        return child;
+      }
+      if (child.childs.length > 0) return this.findNodeByTytle(tytle, child);
+      else continue;
     }
   }
 
-  isNodAdded(node){
-    if (node.added){
-      return true
-    }
-    else{
-      node.added = true
-      return false
+  resetNodesAd() {
+    for (let node of Object.values(this.cash)) {
+      node.added = false;
     }
   }
- 
+
+  isNodAdded(node) {
+    if (node.added) {
+      return true;
+    } else {
+      node.added = true;
+      return false;
+    }
+  }
+
   *getFloors() {
     let floor = [this.root];
     while (floor.length > 0) {
@@ -84,36 +83,43 @@ class Graph {
     }
   }
 
-  getFloor(parents=[]) { 
-      let childs = [];
-      let tempChilds = []
-      for (let nod of parents) {
-          tempChilds.push(...nod.childs);
-      }
-      for (let nod of tempChilds) {
-        if (!this.isNodAdded(nod)) childs.push(nod);
-      }
-      return childs
+  getFloor(parents = []) {
+    let childs = [];
+    let tempChilds = [];
+    for (let nod of parents) {
+      tempChilds.push(...nod.childs);
+    }
+    for (let nod of tempChilds) {
+      if (!this.isNodAdded(nod)) childs.push(nod);
+    }
+    return childs;
+  }
+  spanExclNodes() {
+    let childs = [...this.exclNodes.map((x) => this.nodes[x].child)];
+    this.exclNodes = this.exclNodes.filter((x) => childs.flat().includes(x));
+    this.exclNodes.push("Приветствие")
   }
 
   *represente() {
-    this.resetNodesAd() 
-    let parents = [this.root]
-    let childs = []
-    let selected = false
-    yield [parents, selected]
-    while(parents.length>0){
-      childs = this.getFloor(parents)
-      childs=childs.filter(x=>x.isAllParents(this.exclNodes))
-      yield [childs, selected]
-      selected = false
-      let intercept = childs.map(x=>x.tytle).filter(x=>this.exclNodes.includes(x))
-      if (intercept.length>0){
-        selected=true
-        childs=childs.filter(x=>intercept.includes(x.tytle))
+    this.resetNodesAd();
+    this.spanExclNodes();
+    let parents = [this.root];
+    let childs = [];
+    let selected = false;
+    yield [parents, selected];
+    while (parents.length > 0) {
+      childs = this.getFloor(parents);
+      childs = childs.filter((x) => x.isAllParents(this.exclNodes));
+      yield [childs, selected];
+      selected = false;
+      let intercept = childs
+        .map((x) => x.tytle)
+        .filter((x) => this.exclNodes.includes(x));
+      if (intercept.length > 0) {
+        selected = true;
+        childs = childs.filter((x) => intercept.includes(x.tytle));
       }
-      parents = childs
-      
+      parents = childs;
     }
   }
 
@@ -128,26 +134,4 @@ class Graph {
     this.exclNodes = exclNodes;
   }
 }
-
-// function makeGraph(allNodes, nodes, tree, excl = []) {
-//   let chNodes = [];
-//   for (let e of excl) {
-//     if (nodes.includes(e)) {
-//       nodes = nodes.filter((x) => excl.includes(x));
-//     }
-//   }
-//   for (let node of nodes) {
-//     let tempNodes = [];
-//     tempNodes = allNodes[node].child;
-//     chNodes.push(...tempNodes);
-//   }
-//   if (chNodes.length === 0) return tree;
-
-//   tree.push(new Set(chNodes));
-//   return makeGraph(allNodes, chNodes, tree, excl);
-// }
-// const graph = [];
-// graph.push(["Приветствие"]);
-// let resultGraph = makeGraph(copyNodes, ["Приветствие"], graph, ecxlNodes);
-
 export { Graph };

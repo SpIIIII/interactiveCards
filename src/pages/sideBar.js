@@ -43,14 +43,12 @@ function SideBarSubPunct(props) {
   let checkBox = <></>;
   if (props.check) {
     checkBox = (
-      <input className="sideBarCheck" type="checkbox" ref={checkRef} disabled></input>
+      <input className="sideBarCheck" type="checkbox" ref={checkRef} checked={props.set.spanBranches} disabled></input>
     );
   }
   const subPunktEffectHendler = () => {
     subPunktEffect();
-    console.log(checkRef.current.checked);
-    checkRef.current.checked = !checkRef.current.checked;
-    console.log(checkRef.current.checked);
+    // checkRef.current.checked = !checkRef.current.checked;
   };
 
   return (
@@ -108,6 +106,7 @@ function SideBarPunkt(props) {
         name={punkt}
         effect={props.sub[punkt]}
         check={props.check}
+        set={props.set}
       />
     );
   }
@@ -222,7 +221,11 @@ function SideBar(props) {
         Прозрачночть: () => {
           props.set.hideBranches = !props.set.hideBranches;
           props.upd();
-          return props.set.hideBranches;
+          return props.set.hideBranches
+        },
+        "Последовательный выбор": () => {
+          props.set.spanBranches = !props.set.spanBranches;
+          props.upd();
         }
       },
       check: true
@@ -239,6 +242,7 @@ function SideBar(props) {
         size={barPunctSize}
         sub={punktsList[punkt].sub}
         check={punktsList[punkt].check}
+        set={props.set}
       />
     );
   }
