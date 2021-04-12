@@ -43,7 +43,7 @@ function SideBarSubPunct(props) {
   let checkBox = <></>;
   if (props.check) {
     checkBox = (
-      <input className="sideBarCheck" type="checkbox" ref={checkRef}></input>
+      <input className="sideBarCheck" type="checkbox" ref={checkRef} disabled></input>
     );
   }
   const subPunktEffectHendler = () => {
@@ -58,7 +58,7 @@ function SideBarSubPunct(props) {
       className="sideBarSubPunkt"
       onMouseEnter={makeHovered}
       onMouseLeave={makeUnHovered}
-      onClick={subPunktEffectHendler}
+      onMouseUp={subPunktEffectHendler}
     >
       {checkBox}
       {props.name}
