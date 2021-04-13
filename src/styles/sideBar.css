@@ -42,6 +42,7 @@ li {
   /* padding: 15px; */
   cursor: pointer;
   transition: all cubic-bezier(0.22, 0.76, 0.4, 0.97) 0.3s;
+  display: none
 }
 .sideBarSubPunkt {
   text-align: left;

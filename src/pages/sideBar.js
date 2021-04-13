@@ -42,9 +42,7 @@ function SideBarSubPunct(props) {
   };
   let checkBox = <></>;
   if (props.check) {
-    checkBox = (
-      <input className="sideBarCheck" type="checkbox" ref={checkRef} checked={props.set.spanBranches} disabled></input>
-    );
+    checkBox = props.checkbox
   }
   const subPunktEffectHendler = () => {
     subPunktEffect();
@@ -104,7 +102,8 @@ function SideBarPunkt(props) {
     subPunktsDone.push(
       <SideBarSubPunct
         name={punkt}
-        effect={props.sub[punkt]}
+        effect={props.sub[punkt].effect}
+        checkbox={ props.sub[punkt].checkbox}
         check={props.check}
         set={props.set}
       />
@@ -189,28 +188,32 @@ function SideBar(props) {
     Шаблоны: {
       icon: first,
       sub: {
-        "Общая проблема": () => {
-          props.graph.excludeNodes([
-            "Приветствие",
-            "Интернет",
-            "Нет интернета",
-            "Нет сессии",
-            "IPoE абонент",
-            "PPPoE абонент",
-            "Такиеже проблемы у соседей",
-            "Передать информацию диспеnчеру"
-          ]);
-          props.upd();
-        },
-        "Зависло соединение": () => {
-          props.graph.excludeNodes([
-            "Приветствие",
-            "Интернет",
-            "Нет интернета",
-            "Есть сессия",
-            "Перезагрузка и обновление"
-          ]);
-          props.upd();
+        "Общая проблема":{
+          "effect":() => {
+            props.graph.excludeNodes([
+              "Приветствие",
+              "Интернет",
+              "Нет интернета",
+              "Нет сессии",
+              "IPoE абонент",
+              "PPPoE абонент",
+              "Такиеже проблемы у соседей",
+              "Передать информацию диспеnчеру"
+            ]);
+            props.upd();
+          },
+        } ,
+        "Зависло соединение":{
+          "effect": () => {
+            props.graph.excludeNodes([
+              "Приветствие",
+              "Интернет",
+              "Нет интернета",
+              "Есть сессия",
+              "Перезагрузка и обновление"
+            ]);
+            props.upd();
+          },
         }
       },
       check: false
@@ -218,19 +221,26 @@ function SideBar(props) {
     Настройки: {
       icon: third,
       sub: {
-        Прозрачночть: () => {
-          props.set.hideBranches = !props.set.hideBranches;
-          props.upd();
-          return props.set.hideBranches
+        "Прозрачночть":{
+          "effect": () => {
+            props.set.hideBranches = !props.set.hideBranches;
+            props.upd();
+            return props.set.hideBranches},
+          "checkbox":<input className="sideBarCheck" type="checkbox" checked={props.set.hideBranches} disabled></input>
         },
-        "Последовательный выбор": () => {
-          props.set.spanBranches = !props.set.spanBranches;
-          props.upd();
-        }
+        "Последовательный выбор":{
+            effect: () => {
+              props.set.spanBranches = !props.set.spanBranches;
+              props.upd();
+          },
+          "checkbox":<input className="sideBarCheck" type="checkbox" checked={props.set.spanBranches} disabled></input>
+        },
       },
       check: true
+    },
+      
     }
-  };
+  
 
   const punktsListDone = [];
   // useEffect(() => {

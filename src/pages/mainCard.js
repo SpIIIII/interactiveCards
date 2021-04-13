@@ -17,13 +17,16 @@ function GraphWrapper(props) {
   const rows = [];
   function excludeNodes(node) {
     const n = node.target.textContent;
-    if (ecxlNodes.includes(n)) {
-      ecxlNodes = ecxlNodes.filter((x) => x !== n);
-    } else ecxlNodes.push(n);
-    props.graph.excludeNodes(ecxlNodes);
-    if(props.set.spanBranches) props.graph.spanExclNodes()
-    ecxlNodes = props.graph.exclNodes
-
+    if (n!==""){
+      if (ecxlNodes.includes(n)) {
+        ecxlNodes = ecxlNodes.filter((x) => x !== n);
+      } else ecxlNodes.push(n);
+      props.graph.excludeNodes(ecxlNodes);
+      if(props.set.spanBranches) props.graph.spanExclNodes()
+      ecxlNodes = props.graph.exclNodes
+    }else{
+      return
+    }
   }
   // ecxlNodes = props.graph.exclNodes;
   for (let pair of props.graph.represente()) {
