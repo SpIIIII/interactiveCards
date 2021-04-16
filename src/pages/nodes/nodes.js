@@ -31,7 +31,6 @@ function Node(props) {
   };
   const extraList = [];
   const extraOpen = (x) => {
-    console.log("popped")
     if(props.text){   
       const parent = document.getElementById("mainC");
       const popover = document.createElement("div");

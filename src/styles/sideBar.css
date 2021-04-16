@@ -93,7 +93,9 @@ li {
 }
 
 .macVenderInput {
+  width:200px; ;
   height: 30px;
+  padding: 0 10px;
   background-color: #272f38;
   border: none;
   border-radius: 5px;

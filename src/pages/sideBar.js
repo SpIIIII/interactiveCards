@@ -158,7 +158,7 @@ function MACVendor(props) {
       <input
         className="macVenderInput"
         type="text"
-        placeholder="test"
+        placeholder="MAC vendor (test)"
         maxlength="17"
       />
     </>
